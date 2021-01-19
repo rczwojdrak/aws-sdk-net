@@ -59,6 +59,9 @@ namespace Amazon.IoTSiteWise.Model.Internal.MarshallTransformations
             request.HttpMethod = "GET";
 
             
+            if (publicRequest.IsSetIamArn())
+                request.Parameters.Add("iamArn", StringUtils.FromString(publicRequest.IamArn));
+            
             if (publicRequest.IsSetIdentityId())
                 request.Parameters.Add("identityId", StringUtils.FromString(publicRequest.IdentityId));
             

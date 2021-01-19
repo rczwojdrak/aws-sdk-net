@@ -42,6 +42,12 @@ namespace Amazon.ResourceGroups.Model
         /// </summary>
         public IPaginatedEnumerable<ListGroupsResponse> Responses => new PaginatedResponse<ListGroupsResponse>(this);
 
+        /// <summary>
+        /// Enumerable containing all of the GroupIdentifiers
+        /// </summary>
+        public IPaginatedEnumerable<GroupIdentifier> GroupIdentifiers => 
+            new PaginatedResultKeyResponse<ListGroupsResponse, GroupIdentifier>(this, (i) => i.GroupIdentifiers);
+
         internal ListGroupsPaginator(IAmazonResourceGroups client, ListGroupsRequest request)
         {
             this._client = client;
@@ -64,7 +70,7 @@ namespace Amazon.ResourceGroups.Model
                 nextToken = response.NextToken;
                 yield return response;
             }
-            while (nextToken != null);
+            while (!string.IsNullOrEmpty(nextToken));
         }
 #endif
 #if AWS_ASYNC_ENUMERABLES_API
@@ -85,7 +91,7 @@ namespace Amazon.ResourceGroups.Model
                 cancellationToken.ThrowIfCancellationRequested();
                 yield return response;
             }
-            while (nextToken != null);
+            while (!string.IsNullOrEmpty(nextToken));
         }
 #endif
     }

@@ -40,8 +40,7 @@ namespace Amazon.SimpleSystemsManagement.Model
         /// <summary>
         /// Gets and sets the property Key. 
         /// <para>
-        /// One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix,
-        /// ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.
+        /// One or more keys to limit the results.
         /// </para>
         /// </summary>
         [AWSProperty(Required=true)]

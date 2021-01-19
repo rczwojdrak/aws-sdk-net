@@ -118,10 +118,22 @@ namespace Amazon.Glue.Model.Internal.MarshallTransformations
                     unmarshalledObject.LastUpdated = unmarshaller.Unmarshall(context);
                     continue;
                 }
+                if (context.TestExpression("LineageConfiguration", targetDepth))
+                {
+                    var unmarshaller = LineageConfigurationUnmarshaller.Instance;
+                    unmarshalledObject.LineageConfiguration = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("Name", targetDepth))
                 {
                     var unmarshaller = StringUnmarshaller.Instance;
                     unmarshalledObject.Name = unmarshaller.Unmarshall(context);
+                    continue;
+                }
+                if (context.TestExpression("RecrawlPolicy", targetDepth))
+                {
+                    var unmarshaller = RecrawlPolicyUnmarshaller.Instance;
+                    unmarshalledObject.RecrawlPolicy = unmarshaller.Unmarshall(context);
                     continue;
                 }
                 if (context.TestExpression("Role", targetDepth))

@@ -82,6 +82,12 @@ namespace Amazon.Glue.Model.Internal.MarshallTransformations
                     unmarshalledObject.JdbcTargets = unmarshaller.Unmarshall(context);
                     continue;
                 }
+                if (context.TestExpression("MongoDBTargets", targetDepth))
+                {
+                    var unmarshaller = new ListUnmarshaller<MongoDBTarget, MongoDBTargetUnmarshaller>(MongoDBTargetUnmarshaller.Instance);
+                    unmarshalledObject.MongoDBTargets = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("S3Targets", targetDepth))
                 {
                     var unmarshaller = new ListUnmarshaller<S3Target, S3TargetUnmarshaller>(S3TargetUnmarshaller.Instance);

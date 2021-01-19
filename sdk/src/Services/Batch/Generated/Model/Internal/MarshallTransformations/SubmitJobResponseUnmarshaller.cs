@@ -51,6 +51,12 @@ namespace Amazon.Batch.Model.Internal.MarshallTransformations
             int targetDepth = context.CurrentDepth;
             while (context.ReadAtDepth(targetDepth))
             {
+                if (context.TestExpression("jobArn", targetDepth))
+                {
+                    var unmarshaller = StringUnmarshaller.Instance;
+                    response.JobArn = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("jobId", targetDepth))
                 {
                     var unmarshaller = StringUnmarshaller.Instance;

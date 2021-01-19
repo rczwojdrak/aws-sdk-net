@@ -35,6 +35,8 @@ namespace Amazon.KeyManagementService.Model
     {
         private string _aliasArn;
         private string _aliasName;
+        private DateTime? _creationDate;
+        private DateTime? _lastUpdatedDate;
         private string _targetKeyId;
 
         /// <summary>
@@ -73,6 +75,36 @@ namespace Amazon.KeyManagementService.Model
         internal bool IsSetAliasName()
         {
             return this._aliasName != null;
+        }
+
+        /// <summary>
+        /// Gets and sets the property CreationDate.
+        /// </summary>
+        public DateTime CreationDate
+        {
+            get { return this._creationDate.GetValueOrDefault(); }
+            set { this._creationDate = value; }
+        }
+
+        // Check to see if CreationDate property is set
+        internal bool IsSetCreationDate()
+        {
+            return this._creationDate.HasValue; 
+        }
+
+        /// <summary>
+        /// Gets and sets the property LastUpdatedDate.
+        /// </summary>
+        public DateTime LastUpdatedDate
+        {
+            get { return this._lastUpdatedDate.GetValueOrDefault(); }
+            set { this._lastUpdatedDate = value; }
+        }
+
+        // Check to see if LastUpdatedDate property is set
+        internal bool IsSetLastUpdatedDate()
+        {
+            return this._lastUpdatedDate.HasValue; 
         }
 
         /// <summary>

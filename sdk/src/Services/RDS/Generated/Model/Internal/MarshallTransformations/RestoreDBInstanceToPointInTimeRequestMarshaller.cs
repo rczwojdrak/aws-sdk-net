@@ -107,6 +107,10 @@ namespace Amazon.RDS.Model.Internal.MarshallTransformations
                         publicRequestlistValueIndex++;
                     }
                 }
+                if(publicRequest.IsSetEnableCustomerOwnedIp())
+                {
+                    request.Parameters.Add("EnableCustomerOwnedIp", StringUtils.FromBool(publicRequest.EnableCustomerOwnedIp));
+                }
                 if(publicRequest.IsSetEnableIAMDatabaseAuthentication())
                 {
                     request.Parameters.Add("EnableIAMDatabaseAuthentication", StringUtils.FromBool(publicRequest.EnableIAMDatabaseAuthentication));
@@ -122,6 +126,10 @@ namespace Amazon.RDS.Model.Internal.MarshallTransformations
                 if(publicRequest.IsSetLicenseModel())
                 {
                     request.Parameters.Add("LicenseModel", StringUtils.FromString(publicRequest.LicenseModel));
+                }
+                if(publicRequest.IsSetMaxAllocatedStorage())
+                {
+                    request.Parameters.Add("MaxAllocatedStorage", StringUtils.FromInt(publicRequest.MaxAllocatedStorage));
                 }
                 if(publicRequest.IsSetMultiAZ())
                 {
@@ -158,6 +166,10 @@ namespace Amazon.RDS.Model.Internal.MarshallTransformations
                 if(publicRequest.IsSetRestoreTimeUtc())
                 {
                     request.Parameters.Add("RestoreTime", StringUtils.FromDateTimeToISO8601(publicRequest.RestoreTimeUtc));
+                }
+                if(publicRequest.IsSetSourceDBInstanceAutomatedBackupsArn())
+                {
+                    request.Parameters.Add("SourceDBInstanceAutomatedBackupsArn", StringUtils.FromString(publicRequest.SourceDBInstanceAutomatedBackupsArn));
                 }
                 if(publicRequest.IsSetSourceDBInstanceIdentifier())
                 {

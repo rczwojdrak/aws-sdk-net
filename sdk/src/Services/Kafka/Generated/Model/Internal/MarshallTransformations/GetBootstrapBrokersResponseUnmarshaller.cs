@@ -57,6 +57,12 @@ namespace Amazon.Kafka.Model.Internal.MarshallTransformations
                     response.BootstrapBrokerString = unmarshaller.Unmarshall(context);
                     continue;
                 }
+                if (context.TestExpression("bootstrapBrokerStringSaslScram", targetDepth))
+                {
+                    var unmarshaller = StringUnmarshaller.Instance;
+                    response.BootstrapBrokerStringSaslScram = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("bootstrapBrokerStringTls", targetDepth))
                 {
                     var unmarshaller = StringUnmarshaller.Instance;

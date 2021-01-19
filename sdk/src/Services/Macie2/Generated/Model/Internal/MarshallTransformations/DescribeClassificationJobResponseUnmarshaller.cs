@@ -105,6 +105,12 @@ namespace Amazon.Macie2.Model.Internal.MarshallTransformations
                     response.JobType = unmarshaller.Unmarshall(context);
                     continue;
                 }
+                if (context.TestExpression("lastRunErrorStatus", targetDepth))
+                {
+                    var unmarshaller = LastRunErrorStatusUnmarshaller.Instance;
+                    response.LastRunErrorStatus = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("lastRunTime", targetDepth))
                 {
                     var unmarshaller = DateTimeUnmarshaller.Instance;
@@ -145,6 +151,12 @@ namespace Amazon.Macie2.Model.Internal.MarshallTransformations
                 {
                     var unmarshaller = new DictionaryUnmarshaller<string, string, StringUnmarshaller, StringUnmarshaller>(StringUnmarshaller.Instance, StringUnmarshaller.Instance);
                     response.Tags = unmarshaller.Unmarshall(context);
+                    continue;
+                }
+                if (context.TestExpression("userPausedDetails", targetDepth))
+                {
+                    var unmarshaller = UserPausedDetailsUnmarshaller.Instance;
+                    response.UserPausedDetails = unmarshaller.Unmarshall(context);
                     continue;
                 }
             }

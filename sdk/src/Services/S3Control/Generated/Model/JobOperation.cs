@@ -29,9 +29,9 @@ using Amazon.Runtime.Internal;
 namespace Amazon.S3Control.Model
 {
     /// <summary>
-    /// The operation that you want this job to perform on each object listed in the manifest.
-    /// For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available
-    /// Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.
+    /// The operation that you want this job to perform on every object listed in the manifest.
+    /// For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Operations</a>
+    /// in the <i>Amazon Simple Storage Service Developer Guide</i>.
     /// </summary>
     public partial class JobOperation
     {
@@ -46,7 +46,8 @@ namespace Amazon.S3Control.Model
         /// <summary>
         /// Gets and sets the property LambdaInvoke. 
         /// <para>
-        /// Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
+        /// Directs the specified job to invoke an AWS Lambda function on every object in the
+        /// manifest.
         /// </para>
         /// </summary>
         public LambdaInvokeOperation LambdaInvoke
@@ -64,8 +65,8 @@ namespace Amazon.S3Control.Model
         /// <summary>
         /// Gets and sets the property S3InitiateRestoreObject. 
         /// <para>
-        /// Directs the specified job to execute an Initiate Glacier Restore call on each object
-        /// in the manifest.
+        /// Directs the specified job to initiate restore requests for every archived object in
+        /// the manifest.
         /// </para>
         /// </summary>
         public S3InitiateRestoreObjectOperation S3InitiateRestoreObject
@@ -83,7 +84,7 @@ namespace Amazon.S3Control.Model
         /// <summary>
         /// Gets and sets the property S3PutObjectAcl. 
         /// <para>
-        /// Directs the specified job to execute a PUT Object acl call on each object in the manifest.
+        /// Directs the specified job to run a PUT Object acl call on every object in the manifest.
         /// </para>
         /// </summary>
         public S3SetObjectAclOperation S3PutObjectAcl
@@ -101,8 +102,7 @@ namespace Amazon.S3Control.Model
         /// <summary>
         /// Gets and sets the property S3PutObjectCopy. 
         /// <para>
-        /// Directs the specified job to execute a PUT Copy object call on each object in the
-        /// manifest.
+        /// Directs the specified job to run a PUT Copy object call on every object in the manifest.
         /// </para>
         /// </summary>
         public S3CopyObjectOperation S3PutObjectCopy
@@ -150,7 +150,7 @@ namespace Amazon.S3Control.Model
         /// <summary>
         /// Gets and sets the property S3PutObjectTagging. 
         /// <para>
-        /// Directs the specified job to execute a PUT Object tagging call on each object in the
+        /// Directs the specified job to run a PUT Object tagging call on every object in the
         /// manifest.
         /// </para>
         /// </summary>

@@ -44,6 +44,9 @@ namespace Amazon.CognitoIdentityProvider
     /// For more information, see the Amazon Cognito Documentation.
     /// </para>
     /// </summary>
+#if NETSTANDARD13
+    [Obsolete("Support for .NET Standard 1.3 is in maintenance mode and will only receive critical bug fixes and security patches. Visit https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/migration-from-net-standard-1-3.html for further details.")]
+#endif
     public partial interface IAmazonCognitoIdentityProvider : IAmazonService, IDisposable
     {
 #if AWS_ASYNC_ENUMERABLES_API
@@ -3876,7 +3879,11 @@ namespace Amazon.CognitoIdentityProvider
         /// MFA factors are enabled and if any are preferred. Only one factor can be set as preferred.
         /// The preferred MFA factor will be used to authenticate a user if multiple factors are
         /// enabled. If multiple options are enabled and no preference is set, a challenge to
-        /// choose an MFA option will be returned during sign in.
+        /// choose an MFA option will be returned during sign in. If an MFA type is enabled for
+        /// a user, the user will be prompted for MFA during all sign in attempts, unless device
+        /// tracking is turned on and the device has been trusted. If you would like MFA to be
+        /// applied selectively based on the assessed risk level of sign in attempts, disable
+        /// MFA for users and turn on Adaptive Authentication for the user pool.
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the SetUserMFAPreference service method.</param>
         /// <param name="cancellationToken">

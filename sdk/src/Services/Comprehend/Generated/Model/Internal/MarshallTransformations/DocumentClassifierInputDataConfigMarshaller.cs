@@ -45,6 +45,28 @@ namespace Amazon.Comprehend.Model.Internal.MarshallTransformations
         /// <returns></returns>
         public void Marshall(DocumentClassifierInputDataConfig requestObject, JsonMarshallerContext context)
         {
+            if(requestObject.IsSetAugmentedManifests())
+            {
+                context.Writer.WritePropertyName("AugmentedManifests");
+                context.Writer.WriteArrayStart();
+                foreach(var requestObjectAugmentedManifestsListValue in requestObject.AugmentedManifests)
+                {
+                    context.Writer.WriteObjectStart();
+
+                    var marshaller = AugmentedManifestsListItemMarshaller.Instance;
+                    marshaller.Marshall(requestObjectAugmentedManifestsListValue, context);
+
+                    context.Writer.WriteObjectEnd();
+                }
+                context.Writer.WriteArrayEnd();
+            }
+
+            if(requestObject.IsSetDataFormat())
+            {
+                context.Writer.WritePropertyName("DataFormat");
+                context.Writer.Write(requestObject.DataFormat);
+            }
+
             if(requestObject.IsSetLabelDelimiter())
             {
                 context.Writer.WritePropertyName("LabelDelimiter");

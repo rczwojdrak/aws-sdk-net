@@ -33,6 +33,9 @@ namespace Amazon.SSOAdmin
     ///
     /// 
     /// </summary>
+#if NETSTANDARD13
+    [Obsolete("Support for .NET Standard 1.3 is in maintenance mode and will only receive critical bug fixes and security patches. Visit https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/migration-from-net-standard-1-3.html for further details.")]
+#endif
     public partial interface IAmazonSSOAdmin : IAmazonService, IDisposable
     {
 #if AWS_ASYNC_ENUMERABLES_API
@@ -48,6 +51,14 @@ namespace Amazon.SSOAdmin
 
         /// <summary>
         /// Attaches an IAM managed policy ARN to a permission set.
+        /// 
+        ///  <note> 
+        /// <para>
+        /// If the permission set is already referenced by one or more account assignments, you
+        /// will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to
+        /// apply the corresponding IAM policy updates to all assigned accounts.
+        /// </para>
+        ///  </note>
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the AttachManagedPolicyToPermissionSet service method.</param>
         /// <param name="cancellationToken">
@@ -98,6 +109,15 @@ namespace Amazon.SSOAdmin
         /// <para>
         /// The term <i>principal</i> here refers to a user or group that is defined in AWS SSO.
         /// </para>
+        ///  </note> <note> 
+        /// <para>
+        /// As part of a successful <code>CreateAccountAssignment</code> call, the specified permission
+        /// set will automatically be provisioned to the account in the form of an IAM policy
+        /// attached to the SSO-created IAM role. If the permission set is subsequently updated,
+        /// the corresponding IAM policies attached to roles in your accounts will not be updated
+        /// automatically. In this case, you will need to call <code> <a>ProvisionPermissionSet</a>
+        /// </code> to make these updates.
+        /// </para>
         ///  </note>
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the CreateAccountAssignment service method.</param>
@@ -137,12 +157,62 @@ namespace Amazon.SSOAdmin
 
         #endregion
                 
+        #region  CreateInstanceAccessControlAttributeConfiguration
+
+
+
+        /// <summary>
+        /// Enables the attributes-based access control (ABAC) feature for the specified AWS SSO
+        /// instance. You can also specify new attributes to add to your ABAC configuration during
+        /// the enabling process. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based
+        /// Access Control</a> in the <i>AWS SSO User Guide</i>.
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the CreateInstanceAccessControlAttributeConfiguration service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the CreateInstanceAccessControlAttributeConfiguration service method, as returned by SSOAdmin.</returns>
+        /// <exception cref="Amazon.SSOAdmin.Model.AccessDeniedException">
+        /// You do not have sufficient access to perform this action.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ConflictException">
+        /// Occurs when a conflict with a previous successful write is detected. This generally
+        /// occurs when the previous write did not have time to propagate to the host serving
+        /// the current request. A retry (with appropriate backoff logic) is the recommended response
+        /// to this exception.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.InternalServerException">
+        /// The request processing has failed because of an unknown error, exception, or failure
+        /// with an internal server.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ResourceNotFoundException">
+        /// Indicates that a requested resource is not found.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ThrottlingException">
+        /// Indicates that the principal has crossed the throttling limits of the API operations.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ValidationException">
+        /// The request failed because it contains a syntax error.
+        /// </exception>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateInstanceAccessControlAttributeConfiguration">REST API Reference for CreateInstanceAccessControlAttributeConfiguration Operation</seealso>
+        Task<CreateInstanceAccessControlAttributeConfigurationResponse> CreateInstanceAccessControlAttributeConfigurationAsync(CreateInstanceAccessControlAttributeConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
+
+        #endregion
+                
         #region  CreatePermissionSet
 
 
 
         /// <summary>
         /// Creates a permission set within a specified SSO instance.
+        /// 
+        ///  <note> 
+        /// <para>
+        /// To grant users and groups access to AWS account resources, use <code> <a>CreateAccountAssignment</a>
+        /// </code>.
+        /// </para>
+        ///  </note>
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the CreatePermissionSet service method.</param>
         /// <param name="cancellationToken">
@@ -262,6 +332,51 @@ namespace Amazon.SSOAdmin
 
         #endregion
                 
+        #region  DeleteInstanceAccessControlAttributeConfiguration
+
+
+
+        /// <summary>
+        /// Disables the attributes-based access control (ABAC) feature for the specified AWS
+        /// SSO instance and deletes all of the attribute mappings that have been configured.
+        /// Once deleted, any attributes that are received from an identity source and any custom
+        /// attributes you have previously configured will not be passed. For more information
+        /// about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based
+        /// Access Control</a> in the <i>AWS SSO User Guide</i>.
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the DeleteInstanceAccessControlAttributeConfiguration service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the DeleteInstanceAccessControlAttributeConfiguration service method, as returned by SSOAdmin.</returns>
+        /// <exception cref="Amazon.SSOAdmin.Model.AccessDeniedException">
+        /// You do not have sufficient access to perform this action.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ConflictException">
+        /// Occurs when a conflict with a previous successful write is detected. This generally
+        /// occurs when the previous write did not have time to propagate to the host serving
+        /// the current request. A retry (with appropriate backoff logic) is the recommended response
+        /// to this exception.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.InternalServerException">
+        /// The request processing has failed because of an unknown error, exception, or failure
+        /// with an internal server.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ResourceNotFoundException">
+        /// Indicates that a requested resource is not found.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ThrottlingException">
+        /// Indicates that the principal has crossed the throttling limits of the API operations.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ValidationException">
+        /// The request failed because it contains a syntax error.
+        /// </exception>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteInstanceAccessControlAttributeConfiguration">REST API Reference for DeleteInstanceAccessControlAttributeConfiguration Operation</seealso>
+        Task<DeleteInstanceAccessControlAttributeConfigurationResponse> DeleteInstanceAccessControlAttributeConfigurationAsync(DeleteInstanceAccessControlAttributeConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
+
+        #endregion
+                
         #region  DeletePermissionSet
 
 
@@ -367,6 +482,44 @@ namespace Amazon.SSOAdmin
         /// </exception>
         /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeAccountAssignmentDeletionStatus">REST API Reference for DescribeAccountAssignmentDeletionStatus Operation</seealso>
         Task<DescribeAccountAssignmentDeletionStatusResponse> DescribeAccountAssignmentDeletionStatusAsync(DescribeAccountAssignmentDeletionStatusRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
+
+        #endregion
+                
+        #region  DescribeInstanceAccessControlAttributeConfiguration
+
+
+
+        /// <summary>
+        /// Returns the list of AWS SSO identity store attributes that have been configured to
+        /// work with attributes-based access control (ABAC) for the specified AWS SSO instance.
+        /// This will not return attributes configured and sent by an external identity provider.
+        /// For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based
+        /// Access Control</a> in the <i>AWS SSO User Guide</i>.
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the DescribeInstanceAccessControlAttributeConfiguration service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the DescribeInstanceAccessControlAttributeConfiguration service method, as returned by SSOAdmin.</returns>
+        /// <exception cref="Amazon.SSOAdmin.Model.AccessDeniedException">
+        /// You do not have sufficient access to perform this action.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.InternalServerException">
+        /// The request processing has failed because of an unknown error, exception, or failure
+        /// with an internal server.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ResourceNotFoundException">
+        /// Indicates that a requested resource is not found.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ThrottlingException">
+        /// Indicates that the principal has crossed the throttling limits of the API operations.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ValidationException">
+        /// The request failed because it contains a syntax error.
+        /// </exception>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfiguration">REST API Reference for DescribeInstanceAccessControlAttributeConfiguration Operation</seealso>
+        Task<DescribeInstanceAccessControlAttributeConfigurationResponse> DescribeInstanceAccessControlAttributeConfigurationAsync(DescribeInstanceAccessControlAttributeConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
 
         #endregion
                 
@@ -897,6 +1050,14 @@ namespace Amazon.SSOAdmin
 
         /// <summary>
         /// Attaches an IAM inline policy to a permission set.
+        /// 
+        ///  <note> 
+        /// <para>
+        /// If the permission set is already referenced by one or more account assignments, you
+        /// will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to
+        /// apply the corresponding IAM policy updates to all assigned accounts.
+        /// </para>
+        ///  </note>
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the PutInlinePolicyToPermissionSet service method.</param>
         /// <param name="cancellationToken">
@@ -1016,6 +1177,52 @@ namespace Amazon.SSOAdmin
         /// </exception>
         /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UntagResource">REST API Reference for UntagResource Operation</seealso>
         Task<UntagResourceResponse> UntagResourceAsync(UntagResourceRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
+
+        #endregion
+                
+        #region  UpdateInstanceAccessControlAttributeConfiguration
+
+
+
+        /// <summary>
+        /// Updates the AWS SSO identity store attributes to use with the AWS SSO instance for
+        /// attributes-based access control (ABAC). When using an external identity provider as
+        /// an identity source, you can pass attributes through the SAML assertion as an alternative
+        /// to configuring attributes from the AWS SSO identity store. If a SAML assertion passes
+        /// any of these attributes, AWS SSO will replace the attribute value with the value from
+        /// the AWS SSO identity store. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based
+        /// Access Control</a> in the <i>AWS SSO User Guide</i>.
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the UpdateInstanceAccessControlAttributeConfiguration service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the UpdateInstanceAccessControlAttributeConfiguration service method, as returned by SSOAdmin.</returns>
+        /// <exception cref="Amazon.SSOAdmin.Model.AccessDeniedException">
+        /// You do not have sufficient access to perform this action.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ConflictException">
+        /// Occurs when a conflict with a previous successful write is detected. This generally
+        /// occurs when the previous write did not have time to propagate to the host serving
+        /// the current request. A retry (with appropriate backoff logic) is the recommended response
+        /// to this exception.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.InternalServerException">
+        /// The request processing has failed because of an unknown error, exception, or failure
+        /// with an internal server.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ResourceNotFoundException">
+        /// Indicates that a requested resource is not found.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ThrottlingException">
+        /// Indicates that the principal has crossed the throttling limits of the API operations.
+        /// </exception>
+        /// <exception cref="Amazon.SSOAdmin.Model.ValidationException">
+        /// The request failed because it contains a syntax error.
+        /// </exception>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceAccessControlAttributeConfiguration">REST API Reference for UpdateInstanceAccessControlAttributeConfiguration Operation</seealso>
+        Task<UpdateInstanceAccessControlAttributeConfigurationResponse> UpdateInstanceAccessControlAttributeConfigurationAsync(UpdateInstanceAccessControlAttributeConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
 
         #endregion
                 

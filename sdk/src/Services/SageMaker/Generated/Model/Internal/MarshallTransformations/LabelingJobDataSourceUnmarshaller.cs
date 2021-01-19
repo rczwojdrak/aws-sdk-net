@@ -70,6 +70,12 @@ namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
                     unmarshalledObject.S3DataSource = unmarshaller.Unmarshall(context);
                     continue;
                 }
+                if (context.TestExpression("SnsDataSource", targetDepth))
+                {
+                    var unmarshaller = LabelingJobSnsDataSourceUnmarshaller.Instance;
+                    unmarshalledObject.SnsDataSource = unmarshaller.Unmarshall(context);
+                    continue;
+                }
             }
           
             return unmarshalledObject;

@@ -56,6 +56,17 @@ namespace Amazon.IoTSiteWise.Model.Internal.MarshallTransformations
                 context.Writer.WriteObjectEnd();
             }
 
+            if(requestObject.IsSetIamUser())
+            {
+                context.Writer.WritePropertyName("iamUser");
+                context.Writer.WriteObjectStart();
+
+                var marshaller = IAMUserIdentityMarshaller.Instance;
+                marshaller.Marshall(requestObject.IamUser, context);
+
+                context.Writer.WriteObjectEnd();
+            }
+
             if(requestObject.IsSetUser())
             {
                 context.Writer.WritePropertyName("user");

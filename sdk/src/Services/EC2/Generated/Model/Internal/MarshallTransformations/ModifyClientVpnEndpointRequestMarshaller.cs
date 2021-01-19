@@ -58,6 +58,17 @@ namespace Amazon.EC2.Model.Internal.MarshallTransformations
 
             if(publicRequest != null)
             {
+                if(publicRequest.IsSetClientConnectOptions())
+                {
+                    if(publicRequest.ClientConnectOptions.IsSetEnabled())
+                    {
+                        request.Parameters.Add("ClientConnectOptions" + "." + "Enabled", StringUtils.FromBool(publicRequest.ClientConnectOptions.Enabled));
+                    }
+                    if(publicRequest.ClientConnectOptions.IsSetLambdaFunctionArn())
+                    {
+                        request.Parameters.Add("ClientConnectOptions" + "." + "LambdaFunctionArn", StringUtils.FromString(publicRequest.ClientConnectOptions.LambdaFunctionArn));
+                    }
+                }
                 if(publicRequest.IsSetClientVpnEndpointId())
                 {
                     request.Parameters.Add("ClientVpnEndpointId", StringUtils.FromString(publicRequest.ClientVpnEndpointId));
@@ -105,6 +116,10 @@ namespace Amazon.EC2.Model.Internal.MarshallTransformations
                         request.Parameters.Add("SecurityGroupId" + "." + publicRequestlistValueIndex, StringUtils.FromString(publicRequestlistValue));
                         publicRequestlistValueIndex++;
                     }
+                }
+                if(publicRequest.IsSetSelfServicePortal())
+                {
+                    request.Parameters.Add("SelfServicePortal", StringUtils.FromString(publicRequest.SelfServicePortal));
                 }
                 if(publicRequest.IsSetServerCertificateArn())
                 {

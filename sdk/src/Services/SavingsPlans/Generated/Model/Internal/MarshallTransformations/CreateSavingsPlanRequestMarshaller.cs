@@ -83,6 +83,12 @@ namespace Amazon.SavingsPlans.Model.Internal.MarshallTransformations
                     context.Writer.Write(publicRequest.Commitment);
                 }
 
+                if(publicRequest.IsSetPurchaseTime())
+                {
+                    context.Writer.WritePropertyName("purchaseTime");
+                    context.Writer.Write(publicRequest.PurchaseTime);
+                }
+
                 if(publicRequest.IsSetSavingsPlanOfferingId())
                 {
                     context.Writer.WritePropertyName("savingsPlanOfferingId");

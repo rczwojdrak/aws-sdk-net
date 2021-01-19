@@ -64,6 +64,18 @@ namespace Amazon.Comprehend.Model.Internal.MarshallTransformations
             int targetDepth = context.CurrentDepth;
             while (context.ReadAtDepth(targetDepth))
             {
+                if (context.TestExpression("AugmentedManifests", targetDepth))
+                {
+                    var unmarshaller = new ListUnmarshaller<AugmentedManifestsListItem, AugmentedManifestsListItemUnmarshaller>(AugmentedManifestsListItemUnmarshaller.Instance);
+                    unmarshalledObject.AugmentedManifests = unmarshaller.Unmarshall(context);
+                    continue;
+                }
+                if (context.TestExpression("DataFormat", targetDepth))
+                {
+                    var unmarshaller = StringUnmarshaller.Instance;
+                    unmarshalledObject.DataFormat = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("LabelDelimiter", targetDepth))
                 {
                     var unmarshaller = StringUnmarshaller.Instance;

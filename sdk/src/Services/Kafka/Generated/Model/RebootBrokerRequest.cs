@@ -40,7 +40,8 @@ namespace Amazon.Kafka.Model
         /// <summary>
         /// Gets and sets the property BrokerIds.             
         /// <para>
-        /// The list of broker IDs to be rebooted.
+        /// The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting
+        /// one broker at a time.
         /// </para>
         /// </summary>
         [AWSProperty(Required=true)]

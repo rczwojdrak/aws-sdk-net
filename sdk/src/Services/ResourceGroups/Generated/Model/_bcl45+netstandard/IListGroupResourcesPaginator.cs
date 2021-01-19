@@ -30,6 +30,16 @@ namespace Amazon.ResourceGroups.Model
         /// Enumerable containing all full responses for the operation
         /// </summary>
         IPaginatedEnumerable<ListGroupResourcesResponse> Responses { get; }
+
+        /// <summary>
+        /// Enumerable containing all of the ResourceIdentifiers
+        /// </summary>
+        IPaginatedEnumerable<ResourceIdentifier> ResourceIdentifiers { get; }
+
+        /// <summary>
+        /// Enumerable containing all of the Resources
+        /// </summary>
+        IPaginatedEnumerable<ListGroupResourcesItem> Resources { get; }
     }
 }
 #endif

@@ -68,6 +68,12 @@ namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
                 JsonWriter writer = new JsonWriter(stringWriter);
                 writer.WriteObjectStart();
                 var context = new JsonMarshallerContext(request, writer);
+                if(publicRequest.IsSetAppNetworkAccessType())
+                {
+                    context.Writer.WritePropertyName("AppNetworkAccessType");
+                    context.Writer.Write(publicRequest.AppNetworkAccessType);
+                }
+
                 if(publicRequest.IsSetAuthMode())
                 {
                     context.Writer.WritePropertyName("AuthMode");
@@ -95,6 +101,12 @@ namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
                 {
                     context.Writer.WritePropertyName("HomeEfsFileSystemKmsKeyId");
                     context.Writer.Write(publicRequest.HomeEfsFileSystemKmsKeyId);
+                }
+
+                if(publicRequest.IsSetKmsKeyId())
+                {
+                    context.Writer.WritePropertyName("KmsKeyId");
+                    context.Writer.Write(publicRequest.KmsKeyId);
                 }
 
                 if(publicRequest.IsSetSubnetIds())

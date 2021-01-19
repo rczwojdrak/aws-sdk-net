@@ -102,6 +102,12 @@ namespace Amazon.Textract.Model.Internal.MarshallTransformations
                     context.Writer.Write(publicRequest.JobTag);
                 }
 
+                if(publicRequest.IsSetKMSKeyId())
+                {
+                    context.Writer.WritePropertyName("KMSKeyId");
+                    context.Writer.Write(publicRequest.KMSKeyId);
+                }
+
                 if(publicRequest.IsSetNotificationChannel())
                 {
                     context.Writer.WritePropertyName("NotificationChannel");
@@ -109,6 +115,17 @@ namespace Amazon.Textract.Model.Internal.MarshallTransformations
 
                     var marshaller = NotificationChannelMarshaller.Instance;
                     marshaller.Marshall(publicRequest.NotificationChannel, context);
+
+                    context.Writer.WriteObjectEnd();
+                }
+
+                if(publicRequest.IsSetOutputConfig())
+                {
+                    context.Writer.WritePropertyName("OutputConfig");
+                    context.Writer.WriteObjectStart();
+
+                    var marshaller = OutputConfigMarshaller.Instance;
+                    marshaller.Marshall(publicRequest.OutputConfig, context);
 
                     context.Writer.WriteObjectEnd();
                 }

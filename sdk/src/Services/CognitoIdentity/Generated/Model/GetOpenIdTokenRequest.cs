@@ -25,6 +25,7 @@ using System.Net;
 
 using Amazon.Runtime;
 using Amazon.Runtime.Internal;
+using Amazon.Runtime.Internal.Auth;
 
 namespace Amazon.CognitoIdentity.Model
 {
@@ -36,7 +37,7 @@ namespace Amazon.CognitoIdentity.Model
     /// 
     ///  
     /// <para>
-    /// The OpenId token is valid for 10 minutes.
+    /// The OpenID token is valid for 10 minutes.
     /// </para>
     ///  
     /// <para>
@@ -73,7 +74,7 @@ namespace Amazon.CognitoIdentity.Model
         /// A set of optional name-value pairs that map provider names to provider tokens. When
         /// using graph.facebook.com and www.amazon.com, supply the access_token returned from
         /// the provider's authflow. For accounts.google.com, an Amazon Cognito user pool provider,
-        /// or any other OpenId Connect provider, always include the <code>id_token</code>.
+        /// or any other OpenID Connect provider, always include the <code>id_token</code>.
         /// </para>
         /// </summary>
         [AWSProperty(Max=10)]
@@ -89,5 +90,13 @@ namespace Amazon.CognitoIdentity.Model
             return this._logins != null && this._logins.Count > 0; 
         }
 
+        /// <summary>
+        /// Get the signer to use for this request.
+        /// </summary>
+        /// <returns>A signer for this request.</returns>
+        override protected AbstractAWSSigner CreateSigner()
+        {
+            return new NullSigner();
+        }
     }
 }

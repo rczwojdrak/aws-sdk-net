@@ -31,6 +31,17 @@ namespace Amazon.Connect.Model
     /// <summary>
     /// Container for the parameters to the ListContactFlows operation.
     /// Provides information about the contact flows for the specified Amazon Connect instance.
+    /// 
+    ///  
+    /// <para>
+    /// You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon
+    /// Connect Flow language</a>.
+    /// </para>
+    ///  
+    /// <para>
+    /// For more information about contact flows, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html">Contact
+    /// Flows</a> in the <i>Amazon Connect Administrator Guide</i>.
+    /// </para>
     /// </summary>
     public partial class ListContactFlowsRequest : AmazonConnectRequest
     {

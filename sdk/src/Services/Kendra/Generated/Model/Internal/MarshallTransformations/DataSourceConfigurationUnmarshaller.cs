@@ -64,10 +64,22 @@ namespace Amazon.Kendra.Model.Internal.MarshallTransformations
             int targetDepth = context.CurrentDepth;
             while (context.ReadAtDepth(targetDepth))
             {
+                if (context.TestExpression("ConfluenceConfiguration", targetDepth))
+                {
+                    var unmarshaller = ConfluenceConfigurationUnmarshaller.Instance;
+                    unmarshalledObject.ConfluenceConfiguration = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("DatabaseConfiguration", targetDepth))
                 {
                     var unmarshaller = DatabaseConfigurationUnmarshaller.Instance;
                     unmarshalledObject.DatabaseConfiguration = unmarshaller.Unmarshall(context);
+                    continue;
+                }
+                if (context.TestExpression("GoogleDriveConfiguration", targetDepth))
+                {
+                    var unmarshaller = GoogleDriveConfigurationUnmarshaller.Instance;
+                    unmarshalledObject.GoogleDriveConfiguration = unmarshaller.Unmarshall(context);
                     continue;
                 }
                 if (context.TestExpression("OneDriveConfiguration", targetDepth))

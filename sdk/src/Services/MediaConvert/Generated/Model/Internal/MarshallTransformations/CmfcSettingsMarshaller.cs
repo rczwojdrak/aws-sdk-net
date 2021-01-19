@@ -45,6 +45,18 @@ namespace Amazon.MediaConvert.Model.Internal.MarshallTransformations
         /// <returns></returns>
         public void Marshall(CmfcSettings requestObject, JsonMarshallerContext context)
         {
+            if(requestObject.IsSetAudioDuration())
+            {
+                context.Writer.WritePropertyName("audioDuration");
+                context.Writer.Write(requestObject.AudioDuration);
+            }
+
+            if(requestObject.IsSetIFrameOnlyManifest())
+            {
+                context.Writer.WritePropertyName("iFrameOnlyManifest");
+                context.Writer.Write(requestObject.IFrameOnlyManifest);
+            }
+
             if(requestObject.IsSetScte35Esam())
             {
                 context.Writer.WritePropertyName("scte35Esam");

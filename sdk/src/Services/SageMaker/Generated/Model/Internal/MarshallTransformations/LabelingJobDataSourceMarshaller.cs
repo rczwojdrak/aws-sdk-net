@@ -56,6 +56,17 @@ namespace Amazon.SageMaker.Model.Internal.MarshallTransformations
                 context.Writer.WriteObjectEnd();
             }
 
+            if(requestObject.IsSetSnsDataSource())
+            {
+                context.Writer.WritePropertyName("SnsDataSource");
+                context.Writer.WriteObjectStart();
+
+                var marshaller = LabelingJobSnsDataSourceMarshaller.Instance;
+                marshaller.Marshall(requestObject.SnsDataSource, context);
+
+                context.Writer.WriteObjectEnd();
+            }
+
         }
 
         /// <summary>

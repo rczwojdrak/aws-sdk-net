@@ -40,6 +40,9 @@ namespace Amazon.S3
     ///
     /// 
     /// </summary>
+#if NETSTANDARD13
+    [Obsolete("Support for .NET Standard 1.3 is in maintenance mode and will only receive critical bug fixes and security patches. Visit https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/migration-from-net-standard-1-3.html for further details.")]
+#endif
     public partial class AmazonS3Client : AmazonServiceClient, IAmazonS3
     {
         private static IServiceMetadata serviceMetadata = new AmazonS3Metadata();
@@ -346,7 +349,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name to which the upload was taking place.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name to which the upload was taking place.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Key of the object for which the multipart upload was initiated.</param>
         /// <param name="uploadId">Upload ID that identifies the multipart upload.</param>
         /// <param name="cancellationToken">
@@ -741,25 +744,23 @@ namespace Amazon.S3
         /// </para>
         ///  </note> 
         /// <para>
-        ///  <b>Encryption</b> 
+        ///  <b>Server-side encryption</b> 
         /// </para>
         ///  
         /// <para>
-        /// The source object that you are copying can be encrypted or unencrypted. The source
-        /// object can be encrypted with server-side encryption using AWS managed encryption keys
-        /// (SSE-S3 or SSE-KMS) or by using a customer-provided encryption key. With server-side
-        /// encryption, Amazon S3 encrypts your data as it writes it to disks in its data centers
-        /// and decrypts the data when you access it. 
-        /// </para>
-        ///  
-        /// <para>
-        /// You can optionally use the appropriate encryption-related headers to request server-side
-        /// encryption for the target object. You have the option to provide your own encryption
-        /// key or use SSE-S3 or SSE-KMS, regardless of the form of server-side encryption that
-        /// was used to encrypt the source object. You can even request encryption if the source
-        /// object was not encrypted. For more information about server-side encryption, see <a
-        /// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Using
+        /// When you perform a CopyObject operation, you can optionally use the appropriate encryption-related
+        /// headers to encrypt the object using server-side encryption with AWS managed encryption
+        /// keys (SSE-S3 or SSE-KMS) or a customer-provided encryption key. With server-side encryption,
+        /// Amazon S3 encrypts your data as it writes it to disks in its data centers and decrypts
+        /// the data when you access it. For more information about server-side encryption, see
+        /// <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Using
         /// Server-Side Encryption</a>.
+        /// </para>
+        ///  
+        /// <para>
+        /// If a target object uses SSE-KMS, you can enable an S3 Bucket Key for the object. For
+        /// more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html">Amazon
+        /// S3 Bucket Keys</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.
         /// </para>
         ///  
         /// <para>
@@ -990,25 +991,23 @@ namespace Amazon.S3
         /// </para>
         ///  </note> 
         /// <para>
-        ///  <b>Encryption</b> 
+        ///  <b>Server-side encryption</b> 
         /// </para>
         ///  
         /// <para>
-        /// The source object that you are copying can be encrypted or unencrypted. The source
-        /// object can be encrypted with server-side encryption using AWS managed encryption keys
-        /// (SSE-S3 or SSE-KMS) or by using a customer-provided encryption key. With server-side
-        /// encryption, Amazon S3 encrypts your data as it writes it to disks in its data centers
-        /// and decrypts the data when you access it. 
-        /// </para>
-        ///  
-        /// <para>
-        /// You can optionally use the appropriate encryption-related headers to request server-side
-        /// encryption for the target object. You have the option to provide your own encryption
-        /// key or use SSE-S3 or SSE-KMS, regardless of the form of server-side encryption that
-        /// was used to encrypt the source object. You can even request encryption if the source
-        /// object was not encrypted. For more information about server-side encryption, see <a
-        /// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Using
+        /// When you perform a CopyObject operation, you can optionally use the appropriate encryption-related
+        /// headers to encrypt the object using server-side encryption with AWS managed encryption
+        /// keys (SSE-S3 or SSE-KMS) or a customer-provided encryption key. With server-side encryption,
+        /// Amazon S3 encrypts your data as it writes it to disks in its data centers and decrypts
+        /// the data when you access it. For more information about server-side encryption, see
+        /// <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Using
         /// Server-Side Encryption</a>.
+        /// </para>
+        ///  
+        /// <para>
+        /// If a target object uses SSE-KMS, you can enable an S3 Bucket Key for the object. For
+        /// more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html">Amazon
+        /// S3 Bucket Keys</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.
         /// </para>
         ///  
         /// <para>
@@ -1242,25 +1241,23 @@ namespace Amazon.S3
         /// </para>
         ///  </note> 
         /// <para>
-        ///  <b>Encryption</b> 
+        ///  <b>Server-side encryption</b> 
         /// </para>
         ///  
         /// <para>
-        /// The source object that you are copying can be encrypted or unencrypted. The source
-        /// object can be encrypted with server-side encryption using AWS managed encryption keys
-        /// (SSE-S3 or SSE-KMS) or by using a customer-provided encryption key. With server-side
-        /// encryption, Amazon S3 encrypts your data as it writes it to disks in its data centers
-        /// and decrypts the data when you access it. 
-        /// </para>
-        ///  
-        /// <para>
-        /// You can optionally use the appropriate encryption-related headers to request server-side
-        /// encryption for the target object. You have the option to provide your own encryption
-        /// key or use SSE-S3 or SSE-KMS, regardless of the form of server-side encryption that
-        /// was used to encrypt the source object. You can even request encryption if the source
-        /// object was not encrypted. For more information about server-side encryption, see <a
-        /// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Using
+        /// When you perform a CopyObject operation, you can optionally use the appropriate encryption-related
+        /// headers to encrypt the object using server-side encryption with AWS managed encryption
+        /// keys (SSE-S3 or SSE-KMS) or a customer-provided encryption key. With server-side encryption,
+        /// Amazon S3 encrypts your data as it writes it to disks in its data centers and decrypts
+        /// the data when you access it. For more information about server-side encryption, see
+        /// <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">Using
         /// Server-Side Encryption</a>.
+        /// </para>
+        ///  
+        /// <para>
+        /// If a target object uses SSE-KMS, you can enable an S3 Bucket Key for the object. For
+        /// more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html">Amazon
+        /// S3 Bucket Keys</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.
         /// </para>
         ///  
         /// <para>
@@ -1491,9 +1488,7 @@ namespace Amazon.S3
         /// </para>
         ///  <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: NoSuchUpload</i> 
         /// </para>
@@ -1506,9 +1501,7 @@ namespace Amazon.S3
         /// <para>
         ///  <i>HTTP Status Code: 404 Not Found</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: InvalidRequest</i> 
         /// </para>
@@ -1704,9 +1697,7 @@ namespace Amazon.S3
         /// </para>
         ///  <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: NoSuchUpload</i> 
         /// </para>
@@ -1719,9 +1710,7 @@ namespace Amazon.S3
         /// <para>
         ///  <i>HTTP Status Code: 404 Not Found</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: InvalidRequest</i> 
         /// </para>
@@ -1920,9 +1909,7 @@ namespace Amazon.S3
         /// </para>
         ///  <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: NoSuchUpload</i> 
         /// </para>
@@ -1935,9 +1922,7 @@ namespace Amazon.S3
         /// <para>
         ///  <i>HTTP Status Code: 404 Not Found</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: InvalidRequest</i> 
         /// </para>
@@ -2015,7 +2000,7 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Deletes the bucket. All objects (including all object versions and delete markers)
+        /// Deletes the S3 bucket. All objects (including all object versions and delete markers)
         /// in the bucket must be deleted before the bucket itself can be deleted.
         /// 
         ///  <p class="title"> <b>Related Resources</b> 
@@ -2049,7 +2034,7 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Deletes the bucket. All objects (including all object versions and delete markers)
+        /// Deletes the S3 bucket. All objects (including all object versions and delete markers)
         /// in the bucket must be deleted before the bucket itself can be deleted.
         /// 
         ///  <p class="title"> <b>Related Resources</b> 
@@ -2213,6 +2198,83 @@ namespace Amazon.S3
 
         #endregion
         
+        #region  DeleteBucketIntelligentTieringConfiguration
+
+        internal virtual DeleteBucketIntelligentTieringConfigurationResponse DeleteBucketIntelligentTieringConfiguration(DeleteBucketIntelligentTieringConfigurationRequest request)
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = DeleteBucketIntelligentTieringConfigurationRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = DeleteBucketIntelligentTieringConfigurationResponseUnmarshaller.Instance;
+
+            return Invoke<DeleteBucketIntelligentTieringConfigurationResponse>(request, options);
+        }
+
+
+
+        /// <summary>
+        /// Deletes the S3 Intelligent-Tiering configuration from the specified bucket.
+        /// 
+        ///  
+        /// <para>
+        /// The S3 Intelligent-Tiering storage class is designed to optimize storage costs by
+        /// automatically moving data to the most cost-effective storage access tier, without
+        /// additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings
+        /// by moving data between access tiers, when access patterns change.
+        /// </para>
+        ///  
+        /// <para>
+        /// The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB
+        /// that you plan to store for at least 30 days. If the size of an object is less than
+        /// 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they
+        /// are always charged at the frequent access tier rates in the S3 Intelligent-Tiering
+        /// storage class. 
+        /// </para>
+        ///  
+        /// <para>
+        /// If you delete an object before the end of the 30-day minimum storage duration period,
+        /// you are charged for 30 days. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access">Storage
+        /// class for automatically optimizing frequently and infrequently accessed objects</a>.
+        /// </para>
+        ///  
+        /// <para>
+        /// Operations related to <code>DeleteBucketIntelligentTieringConfiguration</code> include:
+        /// 
+        /// </para>
+        ///  <ul> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html">GetBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html">PutBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html">ListBucketIntelligentTieringConfigurations</a>
+        /// 
+        /// </para>
+        ///  </li> </ul>
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the DeleteBucketIntelligentTieringConfiguration service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the DeleteBucketIntelligentTieringConfiguration service method, as returned by S3.</returns>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketIntelligentTieringConfiguration">REST API Reference for DeleteBucketIntelligentTieringConfiguration Operation</seealso>
+        public virtual Task<DeleteBucketIntelligentTieringConfigurationResponse> DeleteBucketIntelligentTieringConfigurationAsync(DeleteBucketIntelligentTieringConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = DeleteBucketIntelligentTieringConfigurationRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = DeleteBucketIntelligentTieringConfigurationResponseUnmarshaller.Instance;
+
+            return InvokeAsync<DeleteBucketIntelligentTieringConfigurationResponse>(request, options, cancellationToken);
+        }
+
+        #endregion
+        
         #region  DeleteBucketInventoryConfiguration
 
         internal virtual DeleteBucketInventoryConfigurationResponse DeleteBucketInventoryConfiguration(DeleteBucketInventoryConfigurationRequest request)
@@ -2352,6 +2414,62 @@ namespace Amazon.S3
             options.ResponseUnmarshaller = DeleteBucketMetricsConfigurationResponseUnmarshaller.Instance;
 
             return InvokeAsync<DeleteBucketMetricsConfigurationResponse>(request, options, cancellationToken);
+        }
+
+        #endregion
+        
+        #region  DeleteBucketOwnershipControls
+
+        internal virtual DeleteBucketOwnershipControlsResponse DeleteBucketOwnershipControls(DeleteBucketOwnershipControlsRequest request)
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = DeleteBucketOwnershipControlsRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = DeleteBucketOwnershipControlsResponseUnmarshaller.Instance;
+
+            return Invoke<DeleteBucketOwnershipControlsResponse>(request, options);
+        }
+
+
+
+        /// <summary>
+        /// Removes <code>OwnershipControls</code> for an Amazon S3 bucket. To use this operation,
+        /// you must have the <code>s3:PutBucketOwnershipControls</code> permission. For more
+        /// information about Amazon S3 permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying
+        /// Permissions in a Policy</a>.
+        /// 
+        ///  
+        /// <para>
+        /// For information about Amazon S3 Object Ownership, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html">Using
+        /// Object Ownership</a>. 
+        /// </para>
+        ///  
+        /// <para>
+        /// The following operations are related to <code>DeleteBucketOwnershipControls</code>:
+        /// </para>
+        ///  <ul> <li> 
+        /// <para>
+        ///  <a>GetBucketOwnershipControls</a> 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a>PutBucketOwnershipControls</a> 
+        /// </para>
+        ///  </li> </ul>
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the DeleteBucketOwnershipControls service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the DeleteBucketOwnershipControls service method, as returned by S3.</returns>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketOwnershipControls">REST API Reference for DeleteBucketOwnershipControls Operation</seealso>
+        public virtual Task<DeleteBucketOwnershipControlsResponse> DeleteBucketOwnershipControlsAsync(DeleteBucketOwnershipControlsRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = DeleteBucketOwnershipControlsRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = DeleteBucketOwnershipControlsResponseUnmarshaller.Instance;
+
+            return InvokeAsync<DeleteBucketOwnershipControlsResponse>(request, options, cancellationToken);
         }
 
         #endregion
@@ -3048,7 +3166,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name of the bucket containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name of the bucket containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Key name of the object to delete.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -3110,7 +3228,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name of the bucket containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name of the bucket containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Key name of the object to delete.</param>
         /// <param name="versionId">VersionId used to reference a specific version of the object.</param>
         /// <param name="cancellationToken">
@@ -3552,7 +3670,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">Name of the bucket for which the accelerate configuration is retrieved.</param>
+        /// <param name="bucketName">The name of the bucket for which the accelerate configuration is retrieved.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
         /// </param>
@@ -3752,6 +3870,83 @@ namespace Amazon.S3
             options.ResponseUnmarshaller = GetBucketEncryptionResponseUnmarshaller.Instance;
 
             return InvokeAsync<GetBucketEncryptionResponse>(request, options, cancellationToken);
+        }
+
+        #endregion
+        
+        #region  GetBucketIntelligentTieringConfiguration
+
+        internal virtual GetBucketIntelligentTieringConfigurationResponse GetBucketIntelligentTieringConfiguration(GetBucketIntelligentTieringConfigurationRequest request)
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = GetBucketIntelligentTieringConfigurationRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = GetBucketIntelligentTieringConfigurationResponseUnmarshaller.Instance;
+
+            return Invoke<GetBucketIntelligentTieringConfigurationResponse>(request, options);
+        }
+
+
+
+        /// <summary>
+        /// Gets the S3 Intelligent-Tiering configuration from the specified bucket.
+        /// 
+        ///  
+        /// <para>
+        /// The S3 Intelligent-Tiering storage class is designed to optimize storage costs by
+        /// automatically moving data to the most cost-effective storage access tier, without
+        /// additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings
+        /// by moving data between access tiers, when access patterns change.
+        /// </para>
+        ///  
+        /// <para>
+        /// The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB
+        /// that you plan to store for at least 30 days. If the size of an object is less than
+        /// 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they
+        /// are always charged at the frequent access tier rates in the S3 Intelligent-Tiering
+        /// storage class. 
+        /// </para>
+        ///  
+        /// <para>
+        /// If you delete an object before the end of the 30-day minimum storage duration period,
+        /// you are charged for 30 days. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access">Storage
+        /// class for automatically optimizing frequently and infrequently accessed objects</a>.
+        /// </para>
+        ///  
+        /// <para>
+        /// Operations related to <code>GetBucketIntelligentTieringConfiguration</code> include:
+        /// 
+        /// </para>
+        ///  <ul> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html">DeleteBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html">PutBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html">ListBucketIntelligentTieringConfigurations</a>
+        /// 
+        /// </para>
+        ///  </li> </ul>
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the GetBucketIntelligentTieringConfiguration service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the GetBucketIntelligentTieringConfiguration service method, as returned by S3.</returns>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketIntelligentTieringConfiguration">REST API Reference for GetBucketIntelligentTieringConfiguration Operation</seealso>
+        public virtual Task<GetBucketIntelligentTieringConfigurationResponse> GetBucketIntelligentTieringConfigurationAsync(GetBucketIntelligentTieringConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = GetBucketIntelligentTieringConfigurationRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = GetBucketIntelligentTieringConfigurationResponseUnmarshaller.Instance;
+
+            return InvokeAsync<GetBucketIntelligentTieringConfigurationResponse>(request, options, cancellationToken);
         }
 
         #endregion
@@ -4127,7 +4322,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">Name of the bucket for which to get the notification configuration.</param>
+        /// <param name="bucketName">The name of the bucket for which to get the notification configuration.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
         /// </param>
@@ -4191,6 +4386,62 @@ namespace Amazon.S3
             options.ResponseUnmarshaller = GetBucketNotificationResponseUnmarshaller.Instance;
 
             return InvokeAsync<GetBucketNotificationResponse>(request, options, cancellationToken);
+        }
+
+        #endregion
+        
+        #region  GetBucketOwnershipControls
+
+        internal virtual GetBucketOwnershipControlsResponse GetBucketOwnershipControls(GetBucketOwnershipControlsRequest request)
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = GetBucketOwnershipControlsRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = GetBucketOwnershipControlsResponseUnmarshaller.Instance;
+
+            return Invoke<GetBucketOwnershipControlsResponse>(request, options);
+        }
+
+
+
+        /// <summary>
+        /// Retrieves <code>OwnershipControls</code> for an Amazon S3 bucket. To use this operation,
+        /// you must have the <code>s3:GetBucketOwnershipControls</code> permission. For more
+        /// information about Amazon S3 permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying
+        /// Permissions in a Policy</a>. 
+        /// 
+        ///  
+        /// <para>
+        /// For information about Amazon S3 Object Ownership, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html">Using
+        /// Object Ownership</a>. 
+        /// </para>
+        ///  
+        /// <para>
+        /// The following operations are related to <code>GetBucketOwnershipControls</code>:
+        /// </para>
+        ///  <ul> <li> 
+        /// <para>
+        ///  <a>PutBucketOwnershipControls</a> 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a>DeleteBucketOwnershipControls</a> 
+        /// </para>
+        ///  </li> </ul>
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the GetBucketOwnershipControls service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the GetBucketOwnershipControls service method, as returned by S3.</returns>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketOwnershipControls">REST API Reference for GetBucketOwnershipControls Operation</seealso>
+        public virtual Task<GetBucketOwnershipControlsResponse> GetBucketOwnershipControlsAsync(GetBucketOwnershipControlsRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = GetBucketOwnershipControlsRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = GetBucketOwnershipControlsResponseUnmarshaller.Instance;
+
+            return InvokeAsync<GetBucketOwnershipControlsResponse>(request, options, cancellationToken);
         }
 
         #endregion
@@ -4900,7 +5151,7 @@ namespace Amazon.S3
         /// key name prefix, one or more object tags, or a combination of both. Accordingly, this
         /// section describes the latest API. The response describes the new filter element that
         /// you can use to specify a filter to select a subset of objects to which the rule applies.
-        /// If you are still using previous version of the lifecycle configuration, it works.
+        /// If you are using a previous version of the lifecycle configuration, it still works.
         /// For the earlier API description, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html">GetBucketLifecycle</a>.
         /// </para>
         ///  </note> 
@@ -4981,7 +5232,7 @@ namespace Amazon.S3
         /// key name prefix, one or more object tags, or a combination of both. Accordingly, this
         /// section describes the latest API. The response describes the new filter element that
         /// you can use to specify a filter to select a subset of objects to which the rule applies.
-        /// If you are still using previous version of the lifecycle configuration, it works.
+        /// If you are using a previous version of the lifecycle configuration, it still works.
         /// For the earlier API description, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html">GetBucketLifecycle</a>.
         /// </para>
         ///  </note> 
@@ -5101,9 +5352,9 @@ namespace Amazon.S3
         /// </para>
         ///  
         /// <para>
-        /// If the object you are retrieving is stored in the GLACIER or DEEP_ARCHIVE storage
-        /// classes, before you can retrieve the object you must first restore a copy using <a
-        /// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html">RestoreObject</a>.
+        /// If the object you are retrieving is stored in the S3 Glacier or S3 Glacier Deep Archive
+        /// storage class, or S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep Archive
+        /// tiers, before you can retrieve the object you must first restore a copy using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html">RestoreObject</a>.
         /// Otherwise, this operation returns an <code>InvalidObjectStateError</code> error. For
         /// information about restoring archived objects, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html">Restoring
         /// Archived Objects</a>.
@@ -5275,7 +5526,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Key of the object to get.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -5324,9 +5575,9 @@ namespace Amazon.S3
         /// </para>
         ///  
         /// <para>
-        /// If the object you are retrieving is stored in the GLACIER or DEEP_ARCHIVE storage
-        /// classes, before you can retrieve the object you must first restore a copy using <a
-        /// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html">RestoreObject</a>.
+        /// If the object you are retrieving is stored in the S3 Glacier or S3 Glacier Deep Archive
+        /// storage class, or S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep Archive
+        /// tiers, before you can retrieve the object you must first restore a copy using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html">RestoreObject</a>.
         /// Otherwise, this operation returns an <code>InvalidObjectStateError</code> error. For
         /// information about restoring archived objects, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html">Restoring
         /// Archived Objects</a>.
@@ -5498,7 +5749,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name containing the object.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Key of the object to get.</param>
         /// <param name="versionId">VersionId used to reference a specific version of the object.</param>
         /// <param name="cancellationToken">
@@ -5550,9 +5801,9 @@ namespace Amazon.S3
         /// </para>
         ///  
         /// <para>
-        /// If the object you are retrieving is stored in the GLACIER or DEEP_ARCHIVE storage
-        /// classes, before you can retrieve the object you must first restore a copy using <a
-        /// href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html">RestoreObject</a>.
+        /// If the object you are retrieving is stored in the S3 Glacier or S3 Glacier Deep Archive
+        /// storage class, or S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep Archive
+        /// tiers, before you can retrieve the object you must first restore a copy using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html">RestoreObject</a>.
         /// Otherwise, this operation returns an <code>InvalidObjectStateError</code> error. For
         /// information about restoring archived objects, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html">Restoring
         /// Archived Objects</a>.
@@ -5758,6 +6009,11 @@ namespace Amazon.S3
         /// <summary>
         /// Gets an object's current Legal Hold status. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking
         /// Objects</a>.
+        /// 
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the GetObjectLegalHold service method.</param>
         /// <param name="cancellationToken">
@@ -5948,7 +6204,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The name of the bucket containing the object.</param>
+        /// <param name="bucketName">The name of the bucket containing the object. When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">The object key.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -6087,7 +6343,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The name of the bucket containing the object.</param>
+        /// <param name="bucketName">The name of the bucket containing the object. When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">The object key.</param>
         /// <param name="versionId">VersionId used to reference a specific version of the object.</param>
         /// <param name="cancellationToken">
@@ -6263,6 +6519,11 @@ namespace Amazon.S3
         /// <summary>
         /// Retrieves an object's retention settings. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html">Locking
         /// Objects</a>.
+        /// 
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the GetObjectRetention service method.</param>
         /// <param name="cancellationToken">
@@ -6359,18 +6620,22 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Return torrent files from a bucket. BitTorrent can save you bandwidth when you're
-        /// distributing large files. For more information about BitTorrent, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html">Amazon
-        /// S3 Torrent</a>.
+        /// Returns torrent files from a bucket. BitTorrent can save you bandwidth when you're
+        /// distributing large files. For more information about BitTorrent, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html">Using
+        /// BitTorrent with Amazon S3</a>.
         /// 
         ///  <note> 
         /// <para>
-        /// You can get torrent only for objects that are less than 5 GB in size and that are
-        /// not encrypted using server-side encryption with customer-provided encryption key.
+        /// You can get torrent only for objects that are less than 5 GB in size, and that are
+        /// not encrypted using server-side encryption with a customer-provided encryption key.
         /// </para>
         ///  </note> 
         /// <para>
         /// To use GET, you must have READ access to the object.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
         /// </para>
         ///  
         /// <para>
@@ -6402,18 +6667,22 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Return torrent files from a bucket. BitTorrent can save you bandwidth when you're
-        /// distributing large files. For more information about BitTorrent, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html">Amazon
-        /// S3 Torrent</a>.
+        /// Returns torrent files from a bucket. BitTorrent can save you bandwidth when you're
+        /// distributing large files. For more information about BitTorrent, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html">Using
+        /// BitTorrent with Amazon S3</a>.
         /// 
         ///  <note> 
         /// <para>
-        /// You can get torrent only for objects that are less than 5 GB in size and that are
-        /// not encrypted using server-side encryption with customer-provided encryption key.
+        /// You can get torrent only for objects that are less than 5 GB in size, and that are
+        /// not encrypted using server-side encryption with a customer-provided encryption key.
         /// </para>
         ///  </note> 
         /// <para>
         /// To use GET, you must have READ access to the object.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
         /// </para>
         ///  
         /// <para>
@@ -6889,7 +7158,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The name of the bucket to which to initiate the upload</param>
+        /// <param name="bucketName">The name of the bucket to which to initiate the upload When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Object key for which the multipart upload is to be initiated.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -7313,6 +7582,83 @@ namespace Amazon.S3
 
         #endregion
         
+        #region  ListBucketIntelligentTieringConfigurations
+
+        internal virtual ListBucketIntelligentTieringConfigurationsResponse ListBucketIntelligentTieringConfigurations(ListBucketIntelligentTieringConfigurationsRequest request)
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = ListBucketIntelligentTieringConfigurationsRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = ListBucketIntelligentTieringConfigurationsResponseUnmarshaller.Instance;
+
+            return Invoke<ListBucketIntelligentTieringConfigurationsResponse>(request, options);
+        }
+
+
+
+        /// <summary>
+        /// Lists the S3 Intelligent-Tiering configuration from the specified bucket.
+        /// 
+        ///  
+        /// <para>
+        /// The S3 Intelligent-Tiering storage class is designed to optimize storage costs by
+        /// automatically moving data to the most cost-effective storage access tier, without
+        /// additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings
+        /// by moving data between access tiers, when access patterns change.
+        /// </para>
+        ///  
+        /// <para>
+        /// The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB
+        /// that you plan to store for at least 30 days. If the size of an object is less than
+        /// 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they
+        /// are always charged at the frequent access tier rates in the S3 Intelligent-Tiering
+        /// storage class. 
+        /// </para>
+        ///  
+        /// <para>
+        /// If you delete an object before the end of the 30-day minimum storage duration period,
+        /// you are charged for 30 days. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access">Storage
+        /// class for automatically optimizing frequently and infrequently accessed objects</a>.
+        /// </para>
+        ///  
+        /// <para>
+        /// Operations related to <code>ListBucketIntelligentTieringConfigurations</code> include:
+        /// 
+        /// </para>
+        ///  <ul> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html">DeleteBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html">PutBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html">GetBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> </ul>
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the ListBucketIntelligentTieringConfigurations service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the ListBucketIntelligentTieringConfigurations service method, as returned by S3.</returns>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketIntelligentTieringConfigurations">REST API Reference for ListBucketIntelligentTieringConfigurations Operation</seealso>
+        public virtual Task<ListBucketIntelligentTieringConfigurationsResponse> ListBucketIntelligentTieringConfigurationsAsync(ListBucketIntelligentTieringConfigurationsRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = ListBucketIntelligentTieringConfigurationsRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = ListBucketIntelligentTieringConfigurationsResponseUnmarshaller.Instance;
+
+            return InvokeAsync<ListBucketIntelligentTieringConfigurationsResponse>(request, options, cancellationToken);
+        }
+
+        #endregion
+        
         #region  ListBucketInventoryConfigurations
 
         internal virtual ListBucketInventoryConfigurationsResponse ListBucketInventoryConfigurations(ListBucketInventoryConfigurationsRequest request)
@@ -7601,7 +7947,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">Name of the bucket to which the multipart upload was initiated.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The name of the bucket to which the multipart upload was initiated.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
         /// </param>
@@ -7679,7 +8025,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">Name of the bucket to which the multipart upload was initiated.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The name of the bucket to which the multipart upload was initiated.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="prefix">Lists in-progress uploads only for those keys that begin with the specified prefix. You can use prefixes to separate a bucket into different grouping of keys. (You can think of using prefix to make groups in the same way you'd use a folder in a file system.)</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -7833,7 +8179,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The name of the bucket containing the objects.</param>
+        /// <param name="bucketName">The name of the bucket containing the objects. When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
         /// </param>
@@ -7891,7 +8237,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The name of the bucket containing the objects.</param>
+        /// <param name="bucketName">The name of the bucket containing the objects. When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="prefix">Limits the response to keys that begin with the specified prefix.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -8117,7 +8463,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">Name of the bucket to which the parts are being uploaded.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The name of the bucket to which the parts are being uploaded.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Object key for which the multipart upload was initiated.</param>
         /// <param name="uploadId">Upload ID identifying the multipart upload whose parts are being listed.</param>
         /// <param name="cancellationToken">
@@ -8222,9 +8568,9 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Returns metadata about all of the versions of objects in a bucket. You can also use
-        /// request parameters as selection criteria to return metadata about a subset of all
-        /// the object versions. 
+        /// Returns metadata about all versions of the objects in a bucket. You can also use request
+        /// parameters as selection criteria to return metadata about a subset of all the object
+        /// versions. 
         /// 
         ///  <note> 
         /// <para>
@@ -8234,6 +8580,10 @@ namespace Amazon.S3
         ///  </note> 
         /// <para>
         /// To use this operation, you must have READ access to the bucket.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
         /// </para>
         ///  
         /// <para>
@@ -8261,7 +8611,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name that contains the objects.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name that contains the objects. </param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
         /// </param>
@@ -8277,9 +8627,9 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Returns metadata about all of the versions of objects in a bucket. You can also use
-        /// request parameters as selection criteria to return metadata about a subset of all
-        /// the object versions. 
+        /// Returns metadata about all versions of the objects in a bucket. You can also use request
+        /// parameters as selection criteria to return metadata about a subset of all the object
+        /// versions. 
         /// 
         ///  <note> 
         /// <para>
@@ -8289,6 +8639,10 @@ namespace Amazon.S3
         ///  </note> 
         /// <para>
         /// To use this operation, you must have READ access to the bucket.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
         /// </para>
         ///  
         /// <para>
@@ -8316,7 +8670,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name that contains the objects.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name that contains the objects. </param>
         /// <param name="prefix">Use this parameter to select only those keys that begin with the specified prefix. You can use prefixes to separate a bucket into different groupings of keys. (You can think of using prefix to make groups in the same way you'd use a folder in a file system.) You can use prefix with delimiter to roll up numerous objects into a single result under CommonPrefixes. </param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -8335,9 +8689,9 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Returns metadata about all of the versions of objects in a bucket. You can also use
-        /// request parameters as selection criteria to return metadata about a subset of all
-        /// the object versions. 
+        /// Returns metadata about all versions of the objects in a bucket. You can also use request
+        /// parameters as selection criteria to return metadata about a subset of all the object
+        /// versions. 
         /// 
         ///  <note> 
         /// <para>
@@ -8347,6 +8701,10 @@ namespace Amazon.S3
         ///  </note> 
         /// <para>
         /// To use this operation, you must have READ access to the bucket.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
         /// </para>
         ///  
         /// <para>
@@ -8673,15 +9031,20 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Creates a new bucket. To create a bucket, you must register with Amazon S3 and have
-        /// a valid AWS Access Key ID to authenticate requests. Anonymous requests are never allowed
-        /// to create buckets. By creating the bucket, you become the bucket owner.
+        /// Creates a new S3 bucket. To create a bucket, you must register with Amazon S3 and
+        /// have a valid AWS Access Key ID to authenticate requests. Anonymous requests are never
+        /// allowed to create buckets. By creating the bucket, you become the bucket owner.
         /// 
         ///  
         /// <para>
-        /// Not every string is an acceptable bucket name. For information on bucket naming restrictions,
-        /// see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html">Working
-        /// with Amazon S3 Buckets</a>.
+        /// Not every string is an acceptable bucket name. For information about bucket naming
+        /// restrictions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html">Working
+        /// with Amazon S3 buckets</a>. 
+        /// </para>
+        ///  
+        /// <para>
+        /// If you want to create an Amazon S3 on Outposts bucket, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html">Create
+        /// Bucket</a>. 
         /// </para>
         ///  
         /// <para>
@@ -8689,8 +9052,8 @@ namespace Amazon.S3
         /// specify a Region in the request body. You might choose a Region to optimize latency,
         /// minimize costs, or address regulatory requirements. For example, if you reside in
         /// Europe, you will probably find it advantageous to create buckets in the Europe (Ireland)
-        /// Region. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro">How
-        /// to Select a Region for Your Buckets</a>.
+        /// Region. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro">Accessing
+        /// a bucket</a>.
         /// </para>
         ///  <note> 
         /// <para>
@@ -8700,7 +9063,7 @@ namespace Amazon.S3
         /// in the request specifies another Region where the bucket is to be created. If you
         /// create a bucket in a Region other than US East (N. Virginia), your application must
         /// be able to handle 307 redirect. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html">Virtual
-        /// Hosting of Buckets</a>.
+        /// hosting of buckets</a>.
         /// </para>
         ///  </note> 
         /// <para>
@@ -8721,7 +9084,7 @@ namespace Amazon.S3
         /// <code>x-amz-grant-read-acp</code>, <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code>
         /// headers. These headers map to the set of permissions Amazon S3 supports in an ACL.
         /// For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access
-        /// Control List (ACL) Overview</a>.
+        /// control list (ACL) overview</a>.
         /// </para>
         ///  
         /// <para>
@@ -8829,15 +9192,20 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// Creates a new bucket. To create a bucket, you must register with Amazon S3 and have
-        /// a valid AWS Access Key ID to authenticate requests. Anonymous requests are never allowed
-        /// to create buckets. By creating the bucket, you become the bucket owner.
+        /// Creates a new S3 bucket. To create a bucket, you must register with Amazon S3 and
+        /// have a valid AWS Access Key ID to authenticate requests. Anonymous requests are never
+        /// allowed to create buckets. By creating the bucket, you become the bucket owner.
         /// 
         ///  
         /// <para>
-        /// Not every string is an acceptable bucket name. For information on bucket naming restrictions,
-        /// see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html">Working
-        /// with Amazon S3 Buckets</a>.
+        /// Not every string is an acceptable bucket name. For information about bucket naming
+        /// restrictions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html">Working
+        /// with Amazon S3 buckets</a>. 
+        /// </para>
+        ///  
+        /// <para>
+        /// If you want to create an Amazon S3 on Outposts bucket, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html">Create
+        /// Bucket</a>. 
         /// </para>
         ///  
         /// <para>
@@ -8845,8 +9213,8 @@ namespace Amazon.S3
         /// specify a Region in the request body. You might choose a Region to optimize latency,
         /// minimize costs, or address regulatory requirements. For example, if you reside in
         /// Europe, you will probably find it advantageous to create buckets in the Europe (Ireland)
-        /// Region. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro">How
-        /// to Select a Region for Your Buckets</a>.
+        /// Region. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro">Accessing
+        /// a bucket</a>.
         /// </para>
         ///  <note> 
         /// <para>
@@ -8856,7 +9224,7 @@ namespace Amazon.S3
         /// in the request specifies another Region where the bucket is to be created. If you
         /// create a bucket in a Region other than US East (N. Virginia), your application must
         /// be able to handle 307 redirect. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html">Virtual
-        /// Hosting of Buckets</a>.
+        /// hosting of buckets</a>.
         /// </para>
         ///  </note> 
         /// <para>
@@ -8877,7 +9245,7 @@ namespace Amazon.S3
         /// <code>x-amz-grant-read-acp</code>, <code>x-amz-grant-write-acp</code>, and <code>x-amz-grant-full-control</code>
         /// headers. These headers map to the set of permissions Amazon S3 supports in an ACL.
         /// For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html">Access
-        /// Control List (ACL) Overview</a>.
+        /// control list (ACL) overview</a>.
         /// </para>
         ///  
         /// <para>
@@ -9214,16 +9582,18 @@ namespace Amazon.S3
 
 
         /// <summary>
-        /// This implementation of the <code>PUT</code> operation uses the <code>encryption</code>
-        /// subresource to set the default encryption state of an existing bucket.
+        /// This operation uses the <code>encryption</code> subresource to configure default encryption
+        /// and Amazon S3 Bucket Key for an existing bucket.
         /// 
         ///  
         /// <para>
-        /// This implementation of the <code>PUT</code> operation sets default encryption for
-        /// a bucket using server-side encryption with Amazon S3-managed keys SSE-S3 or AWS KMS
-        /// customer master keys (CMKs) (SSE-KMS). For information about the Amazon S3 default
-        /// encryption feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html">Amazon
-        /// S3 Default Bucket Encryption</a>.
+        /// Default encryption for a bucket can use server-side encryption with Amazon S3-managed
+        /// keys (SSE-S3) or AWS KMS customer master keys (SSE-KMS). If you specify default encryption
+        /// using SSE-KMS, you can also configure Amazon S3 Bucket Key. For information about
+        /// default encryption, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html">Amazon
+        /// S3 default bucket encryption</a> in the <i>Amazon Simple Storage Service Developer
+        /// Guide</i>. For more information about S3 Bucket Keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html">Amazon
+        /// S3 Bucket Keys</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.
         /// </para>
         ///  <important> 
         /// <para>
@@ -9267,6 +9637,83 @@ namespace Amazon.S3
             options.ResponseUnmarshaller = PutBucketEncryptionResponseUnmarshaller.Instance;
 
             return InvokeAsync<PutBucketEncryptionResponse>(request, options, cancellationToken);
+        }
+
+        #endregion
+        
+        #region  PutBucketIntelligentTieringConfiguration
+
+        internal virtual PutBucketIntelligentTieringConfigurationResponse PutBucketIntelligentTieringConfiguration(PutBucketIntelligentTieringConfigurationRequest request)
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = PutBucketIntelligentTieringConfigurationRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = PutBucketIntelligentTieringConfigurationResponseUnmarshaller.Instance;
+
+            return Invoke<PutBucketIntelligentTieringConfigurationResponse>(request, options);
+        }
+
+
+
+        /// <summary>
+        /// Puts a S3 Intelligent-Tiering configuration to the specified bucket.
+        /// 
+        ///  
+        /// <para>
+        /// The S3 Intelligent-Tiering storage class is designed to optimize storage costs by
+        /// automatically moving data to the most cost-effective storage access tier, without
+        /// additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings
+        /// by moving data between access tiers, when access patterns change.
+        /// </para>
+        ///  
+        /// <para>
+        /// The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB
+        /// that you plan to store for at least 30 days. If the size of an object is less than
+        /// 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they
+        /// are always charged at the frequent access tier rates in the S3 Intelligent-Tiering
+        /// storage class. 
+        /// </para>
+        ///  
+        /// <para>
+        /// If you delete an object before the end of the 30-day minimum storage duration period,
+        /// you are charged for 30 days. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access">Storage
+        /// class for automatically optimizing frequently and infrequently accessed objects</a>.
+        /// </para>
+        ///  
+        /// <para>
+        /// Operations related to <code>PutBucketIntelligentTieringConfiguration</code> include:
+        /// 
+        /// </para>
+        ///  <ul> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html">DeleteBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html">GetBucketIntelligentTieringConfiguration</a>
+        /// 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html">ListBucketIntelligentTieringConfigurations</a>
+        /// 
+        /// </para>
+        ///  </li> </ul>
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the PutBucketIntelligentTieringConfiguration service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the PutBucketIntelligentTieringConfiguration service method, as returned by S3.</returns>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketIntelligentTieringConfiguration">REST API Reference for PutBucketIntelligentTieringConfiguration Operation</seealso>
+        public virtual Task<PutBucketIntelligentTieringConfigurationResponse> PutBucketIntelligentTieringConfigurationAsync(PutBucketIntelligentTieringConfigurationRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = PutBucketIntelligentTieringConfigurationRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = PutBucketIntelligentTieringConfigurationResponseUnmarshaller.Instance;
+
+            return InvokeAsync<PutBucketIntelligentTieringConfigurationResponse>(request, options, cancellationToken);
         }
 
         #endregion
@@ -9728,6 +10175,62 @@ namespace Amazon.S3
 
         #endregion
         
+        #region  PutBucketOwnershipControls
+
+        internal virtual PutBucketOwnershipControlsResponse PutBucketOwnershipControls(PutBucketOwnershipControlsRequest request)
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = PutBucketOwnershipControlsRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = PutBucketOwnershipControlsResponseUnmarshaller.Instance;
+
+            return Invoke<PutBucketOwnershipControlsResponse>(request, options);
+        }
+
+
+
+        /// <summary>
+        /// Creates or modifies <code>OwnershipControls</code> for an Amazon S3 bucket. To use
+        /// this operation, you must have the <code>s3:PutBucketOwnershipControls</code> permission.
+        /// For more information about Amazon S3 permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html">Specifying
+        /// Permissions in a Policy</a>. 
+        /// 
+        ///  
+        /// <para>
+        /// For information about Amazon S3 Object Ownership, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html">Using
+        /// Object Ownership</a>. 
+        /// </para>
+        ///  
+        /// <para>
+        /// The following operations are related to <code>PutBucketOwnershipControls</code>:
+        /// </para>
+        ///  <ul> <li> 
+        /// <para>
+        ///  <a>GetBucketOwnershipControls</a> 
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        ///  <a>DeleteBucketOwnershipControls</a> 
+        /// </para>
+        ///  </li> </ul>
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the PutBucketOwnershipControls service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the PutBucketOwnershipControls service method, as returned by S3.</returns>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketOwnershipControls">REST API Reference for PutBucketOwnershipControls Operation</seealso>
+        public virtual Task<PutBucketOwnershipControlsResponse> PutBucketOwnershipControlsAsync(PutBucketOwnershipControlsRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var options = new InvokeOptions();
+            options.RequestMarshaller = PutBucketOwnershipControlsRequestMarshaller.Instance;
+            options.ResponseUnmarshaller = PutBucketOwnershipControlsResponseUnmarshaller.Instance;
+
+            return InvokeAsync<PutBucketOwnershipControlsResponse>(request, options, cancellationToken);
+        }
+
+        #endregion
+        
         #region  PutBucketPolicy
 
         internal virtual PutBucketPolicyResponse PutBucketPolicy(PutBucketPolicyRequest request)
@@ -9839,7 +10342,7 @@ namespace Amazon.S3
         /// </summary>
         /// <param name="bucketName">The name of the bucket.</param>
         /// <param name="policy">The bucket policy as a JSON document.</param>
-        /// <param name="contentMD5">The MD5 hash of the request body.</param>
+        /// <param name="contentMD5">The MD5 hash of the request body. For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
         /// </param>
@@ -9942,16 +10445,16 @@ namespace Amazon.S3
         ///  </note> 
         /// <para>
         /// Specify the replication configuration in the request body. In the replication configuration,
-        /// you provide the name of the destination bucket where you want Amazon S3 to replicate
-        /// objects, the IAM role that Amazon S3 can assume to replicate objects on your behalf,
-        /// and other relevant information.
+        /// you provide the name of the destination bucket or buckets where you want Amazon S3
+        /// to replicate objects, the IAM role that Amazon S3 can assume to replicate objects
+        /// on your behalf, and other relevant information.
         /// </para>
         ///  
         /// <para>
         /// A replication configuration must include at least one rule, and can contain a maximum
         /// of 1,000. Each rule identifies a subset of objects to replicate by filtering the objects
         /// in the source bucket. To choose additional subsets of objects to replicate, add a
-        /// rule for each subset. All rules must specify the same destination bucket.
+        /// rule for each subset.
         /// </para>
         ///  
         /// <para>
@@ -9963,12 +10466,9 @@ namespace Amazon.S3
         /// </para>
         ///  <note> 
         /// <para>
-        /// The latest version of the replication configuration XML is V2. XML V2 replication
-        /// configurations are those that contain the <code>Filter</code> element for rules, and
-        /// rules that specify S3 Replication Time Control (S3 RTC). In XML V2 replication configurations,
-        /// Amazon S3 doesn't replicate delete markers. Therefore, you must set the <code>DeleteMarkerReplication</code>
-        /// element to <code>Disabled</code>. For backward compatibility, Amazon S3 continues
-        /// to support the XML V1 replication configuration.
+        /// If you are using an earlier version of the replication configuration, Amazon S3 handles
+        /// replication of delete markers differently. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations">Backward
+        /// Compatibility</a>.
         /// </para>
         ///  </note> 
         /// <para>
@@ -11208,8 +11708,16 @@ namespace Amazon.S3
         /// You can optionally request server-side encryption. With server-side encryption, Amazon
         /// S3 encrypts your data as it writes it to disks in its data centers and decrypts the
         /// data when you access it. You have the option to provide your own encryption key or
-        /// use AWS managed encryption keys. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Using
+        /// use AWS managed encryption keys (SSE-S3 or SSE-KMS). For more information, see <a
+        /// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Using
         /// Server-Side Encryption</a>.
+        /// </para>
+        ///  
+        /// <para>
+        /// If you request server-side encryption using AWS Key Management Service (SSE-KMS),
+        /// you can enable an S3 Bucket Key at the object-level. For more information, see <a
+        /// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html">Amazon S3 Bucket
+        /// Keys</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.
         /// </para>
         ///  
         /// <para>
@@ -11230,10 +11738,10 @@ namespace Amazon.S3
         /// </para>
         ///  
         /// <para>
-        /// By default, Amazon S3 uses the STANDARD storage class to store newly created objects.
+        /// By default, Amazon S3 uses the STANDARD Storage Class to store newly created objects.
         /// The STANDARD storage class provides high durability and high availability. Depending
-        /// on performance needs, you can specify a different storage class. For more information,
-        /// see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html">Storage
+        /// on performance needs, you can specify a different Storage Class. Amazon S3 on Outposts
+        /// only uses the OUTPOSTS Storage Class. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html">Storage
         /// Classes</a> in the <i>Amazon S3 Service Developer Guide</i>.
         /// </para>
         ///  
@@ -11302,6 +11810,10 @@ namespace Amazon.S3
         /// <summary>
         /// Applies a Legal Hold configuration to the specified object.
         /// 
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
         ///  <p class="title"> <b>Related Resources</b> 
         /// </para>
         ///  <ul> <li> 
@@ -11395,6 +11907,10 @@ namespace Amazon.S3
         /// <summary>
         /// Places an Object Retention configuration on an object.
         /// 
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
         ///  <p class="title"> <b>Related Resources</b> 
         /// </para>
         ///  <ul> <li> 
@@ -11468,9 +11984,7 @@ namespace Amazon.S3
         /// </para>
         ///  <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: InvalidTagError </i> 
         /// </para>
@@ -11480,9 +11994,7 @@ namespace Amazon.S3
         /// not pass input validation. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html">Object
         /// Tagging</a>.</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: MalformedXMLError </i> 
         /// </para>
@@ -11627,7 +12139,11 @@ namespace Amazon.S3
         /// 
         ///  
         /// <para>
-        /// This operation performs the following types of requests: 
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action performs the following types of requests: 
         /// </para>
         ///  <ul> <li> 
         /// <para>
@@ -11769,26 +12285,23 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul> 
         /// <para>
-        ///  <b>Restoring Archives</b> 
+        ///  <b>Restoring objects</b> 
         /// </para>
         ///  
         /// <para>
-        /// Objects in the GLACIER and DEEP_ARCHIVE storage classes are archived. To access an
-        /// archived object, you must first initiate a restore request. This restores a temporary
-        /// copy of the archived object. In a restore request, you specify the number of days
-        /// that you want the restored copy to exist. After the specified period, Amazon S3 deletes
-        /// the temporary copy but the object remains archived in the GLACIER or DEEP_ARCHIVE
-        /// storage class that object was restored from. 
+        /// Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive storage class,
+        /// and S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep Archive tiers are
+        /// not accessible in real time. For objects in Archive Access or Deep Archive Access
+        /// tiers you must first initiate a restore request, and then wait until the object is
+        /// moved into the Frequent Access tier. For objects in S3 Glacier or S3 Glacier Deep
+        /// Archive storage classes you must first initiate a restore request, and then wait until
+        /// a temporary copy of the object is available. To access an archived object, you must
+        /// restore the object for the duration (number of days) that you specify.
         /// </para>
         ///  
         /// <para>
         /// To restore a specific object version, you can provide a version ID. If you don't provide
         /// a version ID, Amazon S3 restores the current version.
-        /// </para>
-        ///  
-        /// <para>
-        /// The time it takes restore jobs to finish depends on which storage class the object
-        /// is being restored from and which data access tier you specify. 
         /// </para>
         ///  
         /// <para>
@@ -11799,28 +12312,32 @@ namespace Amazon.S3
         ///  <ul> <li> 
         /// <para>
         ///  <b> <code>Expedited</code> </b> - Expedited retrievals allow you to quickly access
-        /// your data stored in the GLACIER storage class when occasional urgent requests for
-        /// a subset of archives are required. For all but the largest archived objects (250 MB+),
-        /// data accessed using Expedited retrievals are typically made available within 1–5 minutes.
-        /// Provisioned capacity ensures that retrieval capacity for Expedited retrievals is available
-        /// when you need it. Expedited retrievals and provisioned capacity are not available
-        /// for the DEEP_ARCHIVE storage class.
+        /// your data stored in the S3 Glacier storage class or S3 Intelligent-Tiering Archive
+        /// tier when occasional urgent requests for a subset of archives are required. For all
+        /// but the largest archived objects (250 MB+), data accessed using Expedited retrievals
+        /// is typically made available within 1–5 minutes. Provisioned capacity ensures that
+        /// retrieval capacity for Expedited retrievals is available when you need it. Expedited
+        /// retrievals and provisioned capacity are not available for objects stored in the S3
+        /// Glacier Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Standard</code> </b> - S3 Standard retrievals allow you to access any of
-        /// your archived objects within several hours. This is the default option for the GLACIER
-        /// and DEEP_ARCHIVE retrieval requests that do not specify the retrieval option. S3 Standard
-        /// retrievals typically complete within 3-5 hours from the GLACIER storage class and
-        /// typically complete within 12 hours from the DEEP_ARCHIVE storage class. 
+        ///  <b> <code>Standard</code> </b> - Standard retrievals allow you to access any of your
+        /// archived objects within several hours. This is the default option for retrieval requests
+        /// that do not specify the retrieval option. Standard retrievals typically finish within
+        /// 3–5 hours for objects stored in the S3 Glacier storage class or S3 Intelligent-Tiering
+        /// Archive tier. They typically finish within 12 hours for objects stored in the S3 Glacier
+        /// Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier. Standard retrievals
+        /// are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are Amazon S3 Glacier’s lowest-cost
-        /// retrieval option, enabling you to retrieve large amounts, even petabytes, of data
-        /// inexpensively in a day. Bulk retrievals typically complete within 5-12 hours from
-        /// the GLACIER storage class and typically complete within 48 hours from the DEEP_ARCHIVE
-        /// storage class.
+        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are the lowest-cost retrieval option
+        /// in S3 Glacier, enabling you to retrieve large amounts, even petabytes, of data inexpensively.
+        /// Bulk retrievals typically finish within 5–12 hours for objects stored in the S3 Glacier
+        /// storage class or S3 Intelligent-Tiering Archive tier. They typically finish within
+        /// 48 hours for objects stored in the S3 Glacier Deep Archive storage class or S3 Intelligent-Tiering
+        /// Deep Archive tier. Bulk retrievals are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> </ul> 
         /// <para>
@@ -11832,13 +12349,8 @@ namespace Amazon.S3
         ///  
         /// <para>
         /// You can use Amazon S3 restore speed upgrade to change the restore speed to a faster
-        /// speed while it is in progress. You upgrade the speed of an in-progress restoration
-        /// by issuing another restore request to the same object, setting a new <code>Tier</code>
-        /// request element. When issuing a request to upgrade the restore tier, you must choose
-        /// a tier that is faster than the tier that the in-progress restore is using. You must
-        /// not change any other parameters, such as the <code>Days</code> request element. For
-        /// more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
-        /// Upgrading the Speed of an In-Progress Restore</a> in the <i>Amazon Simple Storage
+        /// speed while it is in progress. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
+        /// Upgrading the speed of an in-progress restore</a> in the <i>Amazon Simple Storage
         /// Service Developer Guide</i>. 
         /// </para>
         ///  
@@ -11880,19 +12392,17 @@ namespace Amazon.S3
         /// </para>
         ///  <ul> <li> 
         /// <para>
-        /// If the object copy is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
+        /// If the object is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
         /// in the response. 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        /// If the object copy is previously restored, Amazon S3 returns <code>200 OK</code> in
-        /// the response. 
+        /// If the object is previously restored, Amazon S3 returns <code>200 OK</code> in the
+        /// response. 
         /// </para>
         ///  </li> </ul> <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: RestoreAlreadyInProgress</i> 
         /// </para>
@@ -11909,18 +12419,15 @@ namespace Amazon.S3
         /// <para>
         ///  <i>SOAP Fault Code Prefix: Client</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: GlacierExpeditedRetrievalNotAvailable</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <i>Cause: S3 Glacier expedited retrievals are currently not available. Try again
-        /// later. (Returned if there is insufficient capacity to process the Expedited request.
-        /// This error applies only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i>
-        /// 
+        ///  <i>Cause: expedited retrievals are currently not available. Try again later. (Returned
+        /// if there is insufficient capacity to process the Expedited request. This error applies
+        /// only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
@@ -11950,7 +12457,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name or containing the object to restore.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name containing the object to restore.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Object key for which the operation was initiated.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -11972,7 +12479,11 @@ namespace Amazon.S3
         /// 
         ///  
         /// <para>
-        /// This operation performs the following types of requests: 
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action performs the following types of requests: 
         /// </para>
         ///  <ul> <li> 
         /// <para>
@@ -12114,26 +12625,23 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul> 
         /// <para>
-        ///  <b>Restoring Archives</b> 
+        ///  <b>Restoring objects</b> 
         /// </para>
         ///  
         /// <para>
-        /// Objects in the GLACIER and DEEP_ARCHIVE storage classes are archived. To access an
-        /// archived object, you must first initiate a restore request. This restores a temporary
-        /// copy of the archived object. In a restore request, you specify the number of days
-        /// that you want the restored copy to exist. After the specified period, Amazon S3 deletes
-        /// the temporary copy but the object remains archived in the GLACIER or DEEP_ARCHIVE
-        /// storage class that object was restored from. 
+        /// Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive storage class,
+        /// and S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep Archive tiers are
+        /// not accessible in real time. For objects in Archive Access or Deep Archive Access
+        /// tiers you must first initiate a restore request, and then wait until the object is
+        /// moved into the Frequent Access tier. For objects in S3 Glacier or S3 Glacier Deep
+        /// Archive storage classes you must first initiate a restore request, and then wait until
+        /// a temporary copy of the object is available. To access an archived object, you must
+        /// restore the object for the duration (number of days) that you specify.
         /// </para>
         ///  
         /// <para>
         /// To restore a specific object version, you can provide a version ID. If you don't provide
         /// a version ID, Amazon S3 restores the current version.
-        /// </para>
-        ///  
-        /// <para>
-        /// The time it takes restore jobs to finish depends on which storage class the object
-        /// is being restored from and which data access tier you specify. 
         /// </para>
         ///  
         /// <para>
@@ -12144,28 +12652,32 @@ namespace Amazon.S3
         ///  <ul> <li> 
         /// <para>
         ///  <b> <code>Expedited</code> </b> - Expedited retrievals allow you to quickly access
-        /// your data stored in the GLACIER storage class when occasional urgent requests for
-        /// a subset of archives are required. For all but the largest archived objects (250 MB+),
-        /// data accessed using Expedited retrievals are typically made available within 1–5 minutes.
-        /// Provisioned capacity ensures that retrieval capacity for Expedited retrievals is available
-        /// when you need it. Expedited retrievals and provisioned capacity are not available
-        /// for the DEEP_ARCHIVE storage class.
+        /// your data stored in the S3 Glacier storage class or S3 Intelligent-Tiering Archive
+        /// tier when occasional urgent requests for a subset of archives are required. For all
+        /// but the largest archived objects (250 MB+), data accessed using Expedited retrievals
+        /// is typically made available within 1–5 minutes. Provisioned capacity ensures that
+        /// retrieval capacity for Expedited retrievals is available when you need it. Expedited
+        /// retrievals and provisioned capacity are not available for objects stored in the S3
+        /// Glacier Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Standard</code> </b> - S3 Standard retrievals allow you to access any of
-        /// your archived objects within several hours. This is the default option for the GLACIER
-        /// and DEEP_ARCHIVE retrieval requests that do not specify the retrieval option. S3 Standard
-        /// retrievals typically complete within 3-5 hours from the GLACIER storage class and
-        /// typically complete within 12 hours from the DEEP_ARCHIVE storage class. 
+        ///  <b> <code>Standard</code> </b> - Standard retrievals allow you to access any of your
+        /// archived objects within several hours. This is the default option for retrieval requests
+        /// that do not specify the retrieval option. Standard retrievals typically finish within
+        /// 3–5 hours for objects stored in the S3 Glacier storage class or S3 Intelligent-Tiering
+        /// Archive tier. They typically finish within 12 hours for objects stored in the S3 Glacier
+        /// Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier. Standard retrievals
+        /// are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are Amazon S3 Glacier’s lowest-cost
-        /// retrieval option, enabling you to retrieve large amounts, even petabytes, of data
-        /// inexpensively in a day. Bulk retrievals typically complete within 5-12 hours from
-        /// the GLACIER storage class and typically complete within 48 hours from the DEEP_ARCHIVE
-        /// storage class.
+        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are the lowest-cost retrieval option
+        /// in S3 Glacier, enabling you to retrieve large amounts, even petabytes, of data inexpensively.
+        /// Bulk retrievals typically finish within 5–12 hours for objects stored in the S3 Glacier
+        /// storage class or S3 Intelligent-Tiering Archive tier. They typically finish within
+        /// 48 hours for objects stored in the S3 Glacier Deep Archive storage class or S3 Intelligent-Tiering
+        /// Deep Archive tier. Bulk retrievals are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> </ul> 
         /// <para>
@@ -12177,13 +12689,8 @@ namespace Amazon.S3
         ///  
         /// <para>
         /// You can use Amazon S3 restore speed upgrade to change the restore speed to a faster
-        /// speed while it is in progress. You upgrade the speed of an in-progress restoration
-        /// by issuing another restore request to the same object, setting a new <code>Tier</code>
-        /// request element. When issuing a request to upgrade the restore tier, you must choose
-        /// a tier that is faster than the tier that the in-progress restore is using. You must
-        /// not change any other parameters, such as the <code>Days</code> request element. For
-        /// more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
-        /// Upgrading the Speed of an In-Progress Restore</a> in the <i>Amazon Simple Storage
+        /// speed while it is in progress. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
+        /// Upgrading the speed of an in-progress restore</a> in the <i>Amazon Simple Storage
         /// Service Developer Guide</i>. 
         /// </para>
         ///  
@@ -12225,19 +12732,17 @@ namespace Amazon.S3
         /// </para>
         ///  <ul> <li> 
         /// <para>
-        /// If the object copy is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
+        /// If the object is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
         /// in the response. 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        /// If the object copy is previously restored, Amazon S3 returns <code>200 OK</code> in
-        /// the response. 
+        /// If the object is previously restored, Amazon S3 returns <code>200 OK</code> in the
+        /// response. 
         /// </para>
         ///  </li> </ul> <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: RestoreAlreadyInProgress</i> 
         /// </para>
@@ -12254,18 +12759,15 @@ namespace Amazon.S3
         /// <para>
         ///  <i>SOAP Fault Code Prefix: Client</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: GlacierExpeditedRetrievalNotAvailable</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <i>Cause: S3 Glacier expedited retrievals are currently not available. Try again
-        /// later. (Returned if there is insufficient capacity to process the Expedited request.
-        /// This error applies only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i>
-        /// 
+        ///  <i>Cause: expedited retrievals are currently not available. Try again later. (Returned
+        /// if there is insufficient capacity to process the Expedited request. This error applies
+        /// only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
@@ -12295,7 +12797,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name or containing the object to restore.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name containing the object to restore.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Object key for which the operation was initiated.</param>
         /// <param name="days">A property of RestoreObjectRequest used to execute the RestoreObject service method.</param>
         /// <param name="cancellationToken">
@@ -12319,7 +12821,11 @@ namespace Amazon.S3
         /// 
         ///  
         /// <para>
-        /// This operation performs the following types of requests: 
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action performs the following types of requests: 
         /// </para>
         ///  <ul> <li> 
         /// <para>
@@ -12461,26 +12967,23 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul> 
         /// <para>
-        ///  <b>Restoring Archives</b> 
+        ///  <b>Restoring objects</b> 
         /// </para>
         ///  
         /// <para>
-        /// Objects in the GLACIER and DEEP_ARCHIVE storage classes are archived. To access an
-        /// archived object, you must first initiate a restore request. This restores a temporary
-        /// copy of the archived object. In a restore request, you specify the number of days
-        /// that you want the restored copy to exist. After the specified period, Amazon S3 deletes
-        /// the temporary copy but the object remains archived in the GLACIER or DEEP_ARCHIVE
-        /// storage class that object was restored from. 
+        /// Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive storage class,
+        /// and S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep Archive tiers are
+        /// not accessible in real time. For objects in Archive Access or Deep Archive Access
+        /// tiers you must first initiate a restore request, and then wait until the object is
+        /// moved into the Frequent Access tier. For objects in S3 Glacier or S3 Glacier Deep
+        /// Archive storage classes you must first initiate a restore request, and then wait until
+        /// a temporary copy of the object is available. To access an archived object, you must
+        /// restore the object for the duration (number of days) that you specify.
         /// </para>
         ///  
         /// <para>
         /// To restore a specific object version, you can provide a version ID. If you don't provide
         /// a version ID, Amazon S3 restores the current version.
-        /// </para>
-        ///  
-        /// <para>
-        /// The time it takes restore jobs to finish depends on which storage class the object
-        /// is being restored from and which data access tier you specify. 
         /// </para>
         ///  
         /// <para>
@@ -12491,28 +12994,32 @@ namespace Amazon.S3
         ///  <ul> <li> 
         /// <para>
         ///  <b> <code>Expedited</code> </b> - Expedited retrievals allow you to quickly access
-        /// your data stored in the GLACIER storage class when occasional urgent requests for
-        /// a subset of archives are required. For all but the largest archived objects (250 MB+),
-        /// data accessed using Expedited retrievals are typically made available within 1–5 minutes.
-        /// Provisioned capacity ensures that retrieval capacity for Expedited retrievals is available
-        /// when you need it. Expedited retrievals and provisioned capacity are not available
-        /// for the DEEP_ARCHIVE storage class.
+        /// your data stored in the S3 Glacier storage class or S3 Intelligent-Tiering Archive
+        /// tier when occasional urgent requests for a subset of archives are required. For all
+        /// but the largest archived objects (250 MB+), data accessed using Expedited retrievals
+        /// is typically made available within 1–5 minutes. Provisioned capacity ensures that
+        /// retrieval capacity for Expedited retrievals is available when you need it. Expedited
+        /// retrievals and provisioned capacity are not available for objects stored in the S3
+        /// Glacier Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Standard</code> </b> - S3 Standard retrievals allow you to access any of
-        /// your archived objects within several hours. This is the default option for the GLACIER
-        /// and DEEP_ARCHIVE retrieval requests that do not specify the retrieval option. S3 Standard
-        /// retrievals typically complete within 3-5 hours from the GLACIER storage class and
-        /// typically complete within 12 hours from the DEEP_ARCHIVE storage class. 
+        ///  <b> <code>Standard</code> </b> - Standard retrievals allow you to access any of your
+        /// archived objects within several hours. This is the default option for retrieval requests
+        /// that do not specify the retrieval option. Standard retrievals typically finish within
+        /// 3–5 hours for objects stored in the S3 Glacier storage class or S3 Intelligent-Tiering
+        /// Archive tier. They typically finish within 12 hours for objects stored in the S3 Glacier
+        /// Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier. Standard retrievals
+        /// are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are Amazon S3 Glacier’s lowest-cost
-        /// retrieval option, enabling you to retrieve large amounts, even petabytes, of data
-        /// inexpensively in a day. Bulk retrievals typically complete within 5-12 hours from
-        /// the GLACIER storage class and typically complete within 48 hours from the DEEP_ARCHIVE
-        /// storage class.
+        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are the lowest-cost retrieval option
+        /// in S3 Glacier, enabling you to retrieve large amounts, even petabytes, of data inexpensively.
+        /// Bulk retrievals typically finish within 5–12 hours for objects stored in the S3 Glacier
+        /// storage class or S3 Intelligent-Tiering Archive tier. They typically finish within
+        /// 48 hours for objects stored in the S3 Glacier Deep Archive storage class or S3 Intelligent-Tiering
+        /// Deep Archive tier. Bulk retrievals are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> </ul> 
         /// <para>
@@ -12524,13 +13031,8 @@ namespace Amazon.S3
         ///  
         /// <para>
         /// You can use Amazon S3 restore speed upgrade to change the restore speed to a faster
-        /// speed while it is in progress. You upgrade the speed of an in-progress restoration
-        /// by issuing another restore request to the same object, setting a new <code>Tier</code>
-        /// request element. When issuing a request to upgrade the restore tier, you must choose
-        /// a tier that is faster than the tier that the in-progress restore is using. You must
-        /// not change any other parameters, such as the <code>Days</code> request element. For
-        /// more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
-        /// Upgrading the Speed of an In-Progress Restore</a> in the <i>Amazon Simple Storage
+        /// speed while it is in progress. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
+        /// Upgrading the speed of an in-progress restore</a> in the <i>Amazon Simple Storage
         /// Service Developer Guide</i>. 
         /// </para>
         ///  
@@ -12572,19 +13074,17 @@ namespace Amazon.S3
         /// </para>
         ///  <ul> <li> 
         /// <para>
-        /// If the object copy is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
+        /// If the object is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
         /// in the response. 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        /// If the object copy is previously restored, Amazon S3 returns <code>200 OK</code> in
-        /// the response. 
+        /// If the object is previously restored, Amazon S3 returns <code>200 OK</code> in the
+        /// response. 
         /// </para>
         ///  </li> </ul> <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: RestoreAlreadyInProgress</i> 
         /// </para>
@@ -12601,18 +13101,15 @@ namespace Amazon.S3
         /// <para>
         ///  <i>SOAP Fault Code Prefix: Client</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: GlacierExpeditedRetrievalNotAvailable</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <i>Cause: S3 Glacier expedited retrievals are currently not available. Try again
-        /// later. (Returned if there is insufficient capacity to process the Expedited request.
-        /// This error applies only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i>
-        /// 
+        ///  <i>Cause: expedited retrievals are currently not available. Try again later. (Returned
+        /// if there is insufficient capacity to process the Expedited request. This error applies
+        /// only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
@@ -12642,7 +13139,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name or containing the object to restore.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name containing the object to restore.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Object key for which the operation was initiated.</param>
         /// <param name="versionId">VersionId used to reference a specific version of the object.</param>
         /// <param name="cancellationToken">
@@ -12666,7 +13163,11 @@ namespace Amazon.S3
         /// 
         ///  
         /// <para>
-        /// This operation performs the following types of requests: 
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action performs the following types of requests: 
         /// </para>
         ///  <ul> <li> 
         /// <para>
@@ -12808,26 +13309,23 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul> 
         /// <para>
-        ///  <b>Restoring Archives</b> 
+        ///  <b>Restoring objects</b> 
         /// </para>
         ///  
         /// <para>
-        /// Objects in the GLACIER and DEEP_ARCHIVE storage classes are archived. To access an
-        /// archived object, you must first initiate a restore request. This restores a temporary
-        /// copy of the archived object. In a restore request, you specify the number of days
-        /// that you want the restored copy to exist. After the specified period, Amazon S3 deletes
-        /// the temporary copy but the object remains archived in the GLACIER or DEEP_ARCHIVE
-        /// storage class that object was restored from. 
+        /// Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive storage class,
+        /// and S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep Archive tiers are
+        /// not accessible in real time. For objects in Archive Access or Deep Archive Access
+        /// tiers you must first initiate a restore request, and then wait until the object is
+        /// moved into the Frequent Access tier. For objects in S3 Glacier or S3 Glacier Deep
+        /// Archive storage classes you must first initiate a restore request, and then wait until
+        /// a temporary copy of the object is available. To access an archived object, you must
+        /// restore the object for the duration (number of days) that you specify.
         /// </para>
         ///  
         /// <para>
         /// To restore a specific object version, you can provide a version ID. If you don't provide
         /// a version ID, Amazon S3 restores the current version.
-        /// </para>
-        ///  
-        /// <para>
-        /// The time it takes restore jobs to finish depends on which storage class the object
-        /// is being restored from and which data access tier you specify. 
         /// </para>
         ///  
         /// <para>
@@ -12838,28 +13336,32 @@ namespace Amazon.S3
         ///  <ul> <li> 
         /// <para>
         ///  <b> <code>Expedited</code> </b> - Expedited retrievals allow you to quickly access
-        /// your data stored in the GLACIER storage class when occasional urgent requests for
-        /// a subset of archives are required. For all but the largest archived objects (250 MB+),
-        /// data accessed using Expedited retrievals are typically made available within 1–5 minutes.
-        /// Provisioned capacity ensures that retrieval capacity for Expedited retrievals is available
-        /// when you need it. Expedited retrievals and provisioned capacity are not available
-        /// for the DEEP_ARCHIVE storage class.
+        /// your data stored in the S3 Glacier storage class or S3 Intelligent-Tiering Archive
+        /// tier when occasional urgent requests for a subset of archives are required. For all
+        /// but the largest archived objects (250 MB+), data accessed using Expedited retrievals
+        /// is typically made available within 1–5 minutes. Provisioned capacity ensures that
+        /// retrieval capacity for Expedited retrievals is available when you need it. Expedited
+        /// retrievals and provisioned capacity are not available for objects stored in the S3
+        /// Glacier Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Standard</code> </b> - S3 Standard retrievals allow you to access any of
-        /// your archived objects within several hours. This is the default option for the GLACIER
-        /// and DEEP_ARCHIVE retrieval requests that do not specify the retrieval option. S3 Standard
-        /// retrievals typically complete within 3-5 hours from the GLACIER storage class and
-        /// typically complete within 12 hours from the DEEP_ARCHIVE storage class. 
+        ///  <b> <code>Standard</code> </b> - Standard retrievals allow you to access any of your
+        /// archived objects within several hours. This is the default option for retrieval requests
+        /// that do not specify the retrieval option. Standard retrievals typically finish within
+        /// 3–5 hours for objects stored in the S3 Glacier storage class or S3 Intelligent-Tiering
+        /// Archive tier. They typically finish within 12 hours for objects stored in the S3 Glacier
+        /// Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier. Standard retrievals
+        /// are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are Amazon S3 Glacier’s lowest-cost
-        /// retrieval option, enabling you to retrieve large amounts, even petabytes, of data
-        /// inexpensively in a day. Bulk retrievals typically complete within 5-12 hours from
-        /// the GLACIER storage class and typically complete within 48 hours from the DEEP_ARCHIVE
-        /// storage class.
+        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are the lowest-cost retrieval option
+        /// in S3 Glacier, enabling you to retrieve large amounts, even petabytes, of data inexpensively.
+        /// Bulk retrievals typically finish within 5–12 hours for objects stored in the S3 Glacier
+        /// storage class or S3 Intelligent-Tiering Archive tier. They typically finish within
+        /// 48 hours for objects stored in the S3 Glacier Deep Archive storage class or S3 Intelligent-Tiering
+        /// Deep Archive tier. Bulk retrievals are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> </ul> 
         /// <para>
@@ -12871,13 +13373,8 @@ namespace Amazon.S3
         ///  
         /// <para>
         /// You can use Amazon S3 restore speed upgrade to change the restore speed to a faster
-        /// speed while it is in progress. You upgrade the speed of an in-progress restoration
-        /// by issuing another restore request to the same object, setting a new <code>Tier</code>
-        /// request element. When issuing a request to upgrade the restore tier, you must choose
-        /// a tier that is faster than the tier that the in-progress restore is using. You must
-        /// not change any other parameters, such as the <code>Days</code> request element. For
-        /// more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
-        /// Upgrading the Speed of an In-Progress Restore</a> in the <i>Amazon Simple Storage
+        /// speed while it is in progress. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
+        /// Upgrading the speed of an in-progress restore</a> in the <i>Amazon Simple Storage
         /// Service Developer Guide</i>. 
         /// </para>
         ///  
@@ -12919,19 +13416,17 @@ namespace Amazon.S3
         /// </para>
         ///  <ul> <li> 
         /// <para>
-        /// If the object copy is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
+        /// If the object is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
         /// in the response. 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        /// If the object copy is previously restored, Amazon S3 returns <code>200 OK</code> in
-        /// the response. 
+        /// If the object is previously restored, Amazon S3 returns <code>200 OK</code> in the
+        /// response. 
         /// </para>
         ///  </li> </ul> <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: RestoreAlreadyInProgress</i> 
         /// </para>
@@ -12948,18 +13443,15 @@ namespace Amazon.S3
         /// <para>
         ///  <i>SOAP Fault Code Prefix: Client</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: GlacierExpeditedRetrievalNotAvailable</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <i>Cause: S3 Glacier expedited retrievals are currently not available. Try again
-        /// later. (Returned if there is insufficient capacity to process the Expedited request.
-        /// This error applies only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i>
-        /// 
+        ///  <i>Cause: expedited retrievals are currently not available. Try again later. (Returned
+        /// if there is insufficient capacity to process the Expedited request. This error applies
+        /// only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
@@ -12989,7 +13481,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul>
         /// </summary>
-        /// <param name="bucketName">The bucket name or containing the object to restore.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
+        /// <param name="bucketName">The bucket name containing the object to restore.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</param>
         /// <param name="key">Object key for which the operation was initiated.</param>
         /// <param name="versionId">VersionId used to reference a specific version of the object.</param>
         /// <param name="days">A property of RestoreObjectRequest used to execute the RestoreObject service method.</param>
@@ -13016,7 +13508,11 @@ namespace Amazon.S3
         /// 
         ///  
         /// <para>
-        /// This operation performs the following types of requests: 
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
+        ///  
+        /// <para>
+        /// This action performs the following types of requests: 
         /// </para>
         ///  <ul> <li> 
         /// <para>
@@ -13158,26 +13654,23 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul> 
         /// <para>
-        ///  <b>Restoring Archives</b> 
+        ///  <b>Restoring objects</b> 
         /// </para>
         ///  
         /// <para>
-        /// Objects in the GLACIER and DEEP_ARCHIVE storage classes are archived. To access an
-        /// archived object, you must first initiate a restore request. This restores a temporary
-        /// copy of the archived object. In a restore request, you specify the number of days
-        /// that you want the restored copy to exist. After the specified period, Amazon S3 deletes
-        /// the temporary copy but the object remains archived in the GLACIER or DEEP_ARCHIVE
-        /// storage class that object was restored from. 
+        /// Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive storage class,
+        /// and S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep Archive tiers are
+        /// not accessible in real time. For objects in Archive Access or Deep Archive Access
+        /// tiers you must first initiate a restore request, and then wait until the object is
+        /// moved into the Frequent Access tier. For objects in S3 Glacier or S3 Glacier Deep
+        /// Archive storage classes you must first initiate a restore request, and then wait until
+        /// a temporary copy of the object is available. To access an archived object, you must
+        /// restore the object for the duration (number of days) that you specify.
         /// </para>
         ///  
         /// <para>
         /// To restore a specific object version, you can provide a version ID. If you don't provide
         /// a version ID, Amazon S3 restores the current version.
-        /// </para>
-        ///  
-        /// <para>
-        /// The time it takes restore jobs to finish depends on which storage class the object
-        /// is being restored from and which data access tier you specify. 
         /// </para>
         ///  
         /// <para>
@@ -13188,28 +13681,32 @@ namespace Amazon.S3
         ///  <ul> <li> 
         /// <para>
         ///  <b> <code>Expedited</code> </b> - Expedited retrievals allow you to quickly access
-        /// your data stored in the GLACIER storage class when occasional urgent requests for
-        /// a subset of archives are required. For all but the largest archived objects (250 MB+),
-        /// data accessed using Expedited retrievals are typically made available within 1–5 minutes.
-        /// Provisioned capacity ensures that retrieval capacity for Expedited retrievals is available
-        /// when you need it. Expedited retrievals and provisioned capacity are not available
-        /// for the DEEP_ARCHIVE storage class.
+        /// your data stored in the S3 Glacier storage class or S3 Intelligent-Tiering Archive
+        /// tier when occasional urgent requests for a subset of archives are required. For all
+        /// but the largest archived objects (250 MB+), data accessed using Expedited retrievals
+        /// is typically made available within 1–5 minutes. Provisioned capacity ensures that
+        /// retrieval capacity for Expedited retrievals is available when you need it. Expedited
+        /// retrievals and provisioned capacity are not available for objects stored in the S3
+        /// Glacier Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Standard</code> </b> - S3 Standard retrievals allow you to access any of
-        /// your archived objects within several hours. This is the default option for the GLACIER
-        /// and DEEP_ARCHIVE retrieval requests that do not specify the retrieval option. S3 Standard
-        /// retrievals typically complete within 3-5 hours from the GLACIER storage class and
-        /// typically complete within 12 hours from the DEEP_ARCHIVE storage class. 
+        ///  <b> <code>Standard</code> </b> - Standard retrievals allow you to access any of your
+        /// archived objects within several hours. This is the default option for retrieval requests
+        /// that do not specify the retrieval option. Standard retrievals typically finish within
+        /// 3–5 hours for objects stored in the S3 Glacier storage class or S3 Intelligent-Tiering
+        /// Archive tier. They typically finish within 12 hours for objects stored in the S3 Glacier
+        /// Deep Archive storage class or S3 Intelligent-Tiering Deep Archive tier. Standard retrievals
+        /// are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are Amazon S3 Glacier’s lowest-cost
-        /// retrieval option, enabling you to retrieve large amounts, even petabytes, of data
-        /// inexpensively in a day. Bulk retrievals typically complete within 5-12 hours from
-        /// the GLACIER storage class and typically complete within 48 hours from the DEEP_ARCHIVE
-        /// storage class.
+        ///  <b> <code>Bulk</code> </b> - Bulk retrievals are the lowest-cost retrieval option
+        /// in S3 Glacier, enabling you to retrieve large amounts, even petabytes, of data inexpensively.
+        /// Bulk retrievals typically finish within 5–12 hours for objects stored in the S3 Glacier
+        /// storage class or S3 Intelligent-Tiering Archive tier. They typically finish within
+        /// 48 hours for objects stored in the S3 Glacier Deep Archive storage class or S3 Intelligent-Tiering
+        /// Deep Archive tier. Bulk retrievals are free for objects stored in S3 Intelligent-Tiering.
         /// </para>
         ///  </li> </ul> 
         /// <para>
@@ -13221,13 +13718,8 @@ namespace Amazon.S3
         ///  
         /// <para>
         /// You can use Amazon S3 restore speed upgrade to change the restore speed to a faster
-        /// speed while it is in progress. You upgrade the speed of an in-progress restoration
-        /// by issuing another restore request to the same object, setting a new <code>Tier</code>
-        /// request element. When issuing a request to upgrade the restore tier, you must choose
-        /// a tier that is faster than the tier that the in-progress restore is using. You must
-        /// not change any other parameters, such as the <code>Days</code> request element. For
-        /// more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
-        /// Upgrading the Speed of an In-Progress Restore</a> in the <i>Amazon Simple Storage
+        /// speed while it is in progress. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html">
+        /// Upgrading the speed of an in-progress restore</a> in the <i>Amazon Simple Storage
         /// Service Developer Guide</i>. 
         /// </para>
         ///  
@@ -13269,19 +13761,17 @@ namespace Amazon.S3
         /// </para>
         ///  <ul> <li> 
         /// <para>
-        /// If the object copy is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
+        /// If the object is not previously restored, then Amazon S3 returns <code>202 Accepted</code>
         /// in the response. 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        /// If the object copy is previously restored, Amazon S3 returns <code>200 OK</code> in
-        /// the response. 
+        /// If the object is previously restored, Amazon S3 returns <code>200 OK</code> in the
+        /// response. 
         /// </para>
         ///  </li> </ul> <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: RestoreAlreadyInProgress</i> 
         /// </para>
@@ -13298,18 +13788,15 @@ namespace Amazon.S3
         /// <para>
         ///  <i>SOAP Fault Code Prefix: Client</i> 
         /// </para>
-        ///  </li> </ul> </li> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  </li> </ul> </li> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: GlacierExpeditedRetrievalNotAvailable</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
-        ///  <i>Cause: S3 Glacier expedited retrievals are currently not available. Try again
-        /// later. (Returned if there is insufficient capacity to process the Expedited request.
-        /// This error applies only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i>
-        /// 
+        ///  <i>Cause: expedited retrievals are currently not available. Try again later. (Returned
+        /// if there is insufficient capacity to process the Expedited request. This error applies
+        /// only to Expedited retrievals and not to S3 Standard or Bulk retrievals.)</i> 
         /// </para>
         ///  </li> <li> 
         /// <para>
@@ -13378,6 +13865,10 @@ namespace Amazon.S3
         /// only records that match the specified SQL expression. You must also specify the data
         /// serialization format for the response.
         /// 
+        ///  
+        /// <para>
+        /// This action is not supported by Amazon S3 on Outposts.
+        /// </para>
         ///  
         /// <para>
         /// For more information about Amazon S3 Select, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html">Selecting
@@ -13571,6 +14062,13 @@ namespace Amazon.S3
         /// </para>
         ///  
         /// <para>
+        /// If the upload request is signed with Signature Version 4, then AWS S3 uses the <code>x-amz-content-sha256</code>
+        /// header as a checksum instead of <code>Content-MD5</code>. For more information see
+        /// <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html">Authenticating
+        /// Requests: Using the Authorization Header (AWS Signature Version 4)</a>. 
+        /// </para>
+        ///  
+        /// <para>
         ///  <b>Note:</b> After you initiate multipart upload and upload one or more parts, you
         /// must either complete or abort multipart upload in order to stop getting charged for
         /// storage of the uploaded parts. Only after you either complete or abort multipart upload,
@@ -13626,9 +14124,7 @@ namespace Amazon.S3
         /// </para>
         ///  </li> </ul> <p class="title"> <b>Special Errors</b> 
         /// </para>
-        ///  <ul> <li> <p class="title"> <b/> 
-        /// </para>
-        ///  <ul> <li> 
+        ///  <ul> <li> <ul> <li> 
         /// <para>
         ///  <i>Code: NoSuchUpload</i> 
         /// </para>

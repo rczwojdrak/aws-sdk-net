@@ -30,12 +30,12 @@ namespace Amazon.KeyManagementService.Model
 {
     /// <summary>
     /// Container for the parameters to the ListGrants operation.
-    /// Gets a list of all grants for the specified customer master key (CMK).
+    /// Gets a list of all grants for the specified customer master key (CMK). 
     /// 
     ///  
     /// <para>
-    /// To perform this operation on a CMK in a different AWS account, specify the key ARN
-    /// in the value of the <code>KeyId</code> parameter.
+    /// You must specify the CMK in all requests. You can filter the grant list by grant ID
+    /// or grantee principal.
     /// </para>
     ///  <note> 
     /// <para>
@@ -45,18 +45,91 @@ namespace Amazon.KeyManagementService.Model
     /// field contains the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service
     /// principal</a>, which might represent several different grantee principals.
     /// </para>
-    ///  </note>
+    ///  </note> 
+    /// <para>
+    ///  <b>Cross-account use</b>: Yes. To perform this operation on a CMK in a different
+    /// AWS account, specify the key ARN in the value of the <code>KeyId</code> parameter.
+    /// </para>
+    ///  
+    /// <para>
+    ///  <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:ListGrants</a>
+    /// (key policy)
+    /// </para>
+    ///  
+    /// <para>
+    ///  <b>Related operations:</b> 
+    /// </para>
+    ///  <ul> <li> 
+    /// <para>
+    ///  <a>CreateGrant</a> 
+    /// </para>
+    ///  </li> <li> 
+    /// <para>
+    ///  <a>ListRetirableGrants</a> 
+    /// </para>
+    ///  </li> <li> 
+    /// <para>
+    ///  <a>RetireGrant</a> 
+    /// </para>
+    ///  </li> <li> 
+    /// <para>
+    ///  <a>RevokeGrant</a> 
+    /// </para>
+    ///  </li> </ul>
     /// </summary>
     public partial class ListGrantsRequest : AmazonKeyManagementServiceRequest
     {
+        private string _granteePrincipal;
+        private string _grantId;
         private string _keyId;
         private int? _limit;
         private string _marker;
 
         /// <summary>
+        /// Gets and sets the property GranteePrincipal. 
+        /// <para>
+        /// Returns only grants where the specified principal is the grantee principal for the
+        /// grant.
+        /// </para>
+        /// </summary>
+        [AWSProperty(Min=1, Max=256)]
+        public string GranteePrincipal
+        {
+            get { return this._granteePrincipal; }
+            set { this._granteePrincipal = value; }
+        }
+
+        // Check to see if GranteePrincipal property is set
+        internal bool IsSetGranteePrincipal()
+        {
+            return this._granteePrincipal != null;
+        }
+
+        /// <summary>
+        /// Gets and sets the property GrantId. 
+        /// <para>
+        /// Returns only the grant with the specified grant ID. The grant ID uniquely identifies
+        /// the grant. 
+        /// </para>
+        /// </summary>
+        [AWSProperty(Min=1, Max=128)]
+        public string GrantId
+        {
+            get { return this._grantId; }
+            set { this._grantId = value; }
+        }
+
+        // Check to see if GrantId property is set
+        internal bool IsSetGrantId()
+        {
+            return this._grantId != null;
+        }
+
+        /// <summary>
         /// Gets and sets the property KeyId. 
         /// <para>
-        /// A unique identifier for the customer master key (CMK).
+        /// Returns only grants for the specified customer master key (CMK). This parameter is
+        /// required.
         /// </para>
         ///  
         /// <para>

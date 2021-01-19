@@ -257,7 +257,9 @@ namespace Amazon.DocDB.Model
         /// <summary>
         /// Gets and sets the property EngineVersion. 
         /// <para>
-        /// The version number of the database engine to use.
+        /// The version number of the database engine to use. The --engine-version will default
+        /// to the latest major engine version. For production workloads, we recommend explicitly
+        /// declaring this parameter with the intended major engine version.
         /// </para>
         /// </summary>
         public string EngineVersion
@@ -290,25 +292,13 @@ namespace Amazon.DocDB.Model
         /// </para>
         ///  <ul> <li> 
         /// <para>
-        /// If <code>ReplicationSourceIdentifier</code> identifies an encrypted source, then Amazon
-        /// DocumentDB uses the encryption key that is used to encrypt the source. Otherwise,
-        /// Amazon DocumentDB uses your default encryption key. 
-        /// </para>
-        ///  </li> <li> 
-        /// <para>
-        /// If the <code>StorageEncrypted</code> parameter is <code>true</code> and <code>ReplicationSourceIdentifier</code>
-        /// is not specified, Amazon DocumentDB uses your default encryption key. 
+        /// If the <code>StorageEncrypted</code> parameter is <code>true</code>, Amazon DocumentDB
+        /// uses your default encryption key. 
         /// </para>
         ///  </li> </ul> 
         /// <para>
         /// AWS KMS creates the default encryption key for your AWS account. Your AWS account
         /// has a different default encryption key for each AWS Region.
-        /// </para>
-        ///  
-        /// <para>
-        /// If you create a replica of an encrypted cluster in another AWS Region, you must set
-        /// <code>KmsKeyId</code> to a KMS key ID that is valid in the destination AWS Region.
-        /// This key is used to encrypt the replica in that AWS Region.
         /// </para>
         /// </summary>
         public string KmsKeyId

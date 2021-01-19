@@ -49,6 +49,22 @@ namespace Amazon.ElastiCache.Model
     /// </para>
     ///  
     /// <para>
+    ///  <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for
+    /// Memcached engine version 1.5.16 onward).
+    /// </para>
+    ///  
+    /// <para>
+    ///  <code>cache.m6g.large</code>, <code>cache.m6g.xlarge</code>, <code>cache.m6g.2xlarge</code>,
+    /// <code>cache.m6g.4xlarge</code>, <code>cache.m6g.8xlarge</code>, <code>cache.m6g.12xlarge</code>,
+    /// <code>cache.m6g.16xlarge</code> 
+    /// </para>
+    ///  <note> 
+    /// <para>
+    /// For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported
+    /// Node Types</a> 
+    /// </para>
+    ///  </note> 
+    /// <para>
     ///  <b>M5 node types:</b> <code>cache.m5.large</code>, <code>cache.m5.xlarge</code>,
     /// <code>cache.m5.2xlarge</code>, <code>cache.m5.4xlarge</code>, <code>cache.m5.12xlarge</code>,
     /// <code>cache.m5.24xlarge</code> 
@@ -109,6 +125,22 @@ namespace Amazon.ElastiCache.Model
     /// </para>
     ///  
     /// <para>
+    ///  <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for
+    /// Memcached engine version 1.5.16 onward).
+    /// </para>
+    ///  
+    /// <para>
+    ///  <code>cache.r6g.large</code>, <code>cache.r6g.xlarge</code>, <code>cache.r6g.2xlarge</code>,
+    /// <code>cache.r6g.4xlarge</code>, <code>cache.r6g.8xlarge</code>, <code>cache.r6g.12xlarge</code>,
+    /// <code>cache.r6g.16xlarge</code> 
+    /// </para>
+    ///  <note> 
+    /// <para>
+    /// For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported
+    /// Node Types</a> 
+    /// </para>
+    ///  </note> 
+    /// <para>
     ///  <b>R5 node types:</b> <code>cache.r5.large</code>, <code>cache.r5.xlarge</code>,
     /// <code>cache.r5.2xlarge</code>, <code>cache.r5.4xlarge</code>, <code>cache.r5.12xlarge</code>,
     /// <code>cache.r5.24xlarge</code> 
@@ -163,6 +195,7 @@ namespace Amazon.ElastiCache.Model
         private string _cacheNodeId;
         private string _cacheNodeStatus;
         private string _customerAvailabilityZone;
+        private string _customerOutpostArn;
         private Endpoint _endpoint;
         private string _parameterGroupStatus;
         private string _sourceCacheNodeId;
@@ -245,6 +278,24 @@ namespace Amazon.ElastiCache.Model
         internal bool IsSetCustomerAvailabilityZone()
         {
             return this._customerAvailabilityZone != null;
+        }
+
+        /// <summary>
+        /// Gets and sets the property CustomerOutpostArn. 
+        /// <para>
+        /// The customer outpost ARN of the cache node.
+        /// </para>
+        /// </summary>
+        public string CustomerOutpostArn
+        {
+            get { return this._customerOutpostArn; }
+            set { this._customerOutpostArn = value; }
+        }
+
+        // Check to see if CustomerOutpostArn property is set
+        internal bool IsSetCustomerOutpostArn()
+        {
+            return this._customerOutpostArn != null;
         }
 
         /// <summary>

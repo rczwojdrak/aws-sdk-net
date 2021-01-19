@@ -39,7 +39,7 @@ namespace Amazon.QuickSight.Model
         /// <summary>
         /// Gets and sets the property Actions. 
         /// <para>
-        /// The IAM action to grant or revoke permissions on, for example <code>"quicksight:DescribeDashboard"</code>.
+        /// The IAM action to grant or revoke permissions on.
         /// </para>
         /// </summary>
         [AWSProperty(Required=true, Min=1, Max=16)]
@@ -62,7 +62,13 @@ namespace Amazon.QuickSight.Model
         /// </para>
         ///  <ul> <li> 
         /// <para>
-        /// The ARN of an Amazon QuickSight user, group, or namespace. (This is most common.)
+        /// The ARN of an Amazon QuickSight user or group associated with a data source or dataset.
+        /// (This is common.)
+        /// </para>
+        ///  </li> <li> 
+        /// <para>
+        /// The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis,
+        /// dashboard, template, or theme. (This is common.)
         /// </para>
         ///  </li> <li> 
         /// <para>

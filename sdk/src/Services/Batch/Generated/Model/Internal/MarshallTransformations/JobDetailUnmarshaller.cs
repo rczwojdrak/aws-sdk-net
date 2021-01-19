@@ -94,6 +94,12 @@ namespace Amazon.Batch.Model.Internal.MarshallTransformations
                     unmarshalledObject.DependsOn = unmarshaller.Unmarshall(context);
                     continue;
                 }
+                if (context.TestExpression("jobArn", targetDepth))
+                {
+                    var unmarshaller = StringUnmarshaller.Instance;
+                    unmarshalledObject.JobArn = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("jobDefinition", targetDepth))
                 {
                     var unmarshaller = StringUnmarshaller.Instance;
@@ -136,6 +142,18 @@ namespace Amazon.Batch.Model.Internal.MarshallTransformations
                     unmarshalledObject.Parameters = unmarshaller.Unmarshall(context);
                     continue;
                 }
+                if (context.TestExpression("platformCapabilities", targetDepth))
+                {
+                    var unmarshaller = new ListUnmarshaller<string, StringUnmarshaller>(StringUnmarshaller.Instance);
+                    unmarshalledObject.PlatformCapabilities = unmarshaller.Unmarshall(context);
+                    continue;
+                }
+                if (context.TestExpression("propagateTags", targetDepth))
+                {
+                    var unmarshaller = BoolUnmarshaller.Instance;
+                    unmarshalledObject.PropagateTags = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("retryStrategy", targetDepth))
                 {
                     var unmarshaller = RetryStrategyUnmarshaller.Instance;
@@ -164,6 +182,12 @@ namespace Amazon.Batch.Model.Internal.MarshallTransformations
                 {
                     var unmarshaller = LongUnmarshaller.Instance;
                     unmarshalledObject.StoppedAt = unmarshaller.Unmarshall(context);
+                    continue;
+                }
+                if (context.TestExpression("tags", targetDepth))
+                {
+                    var unmarshaller = new DictionaryUnmarshaller<string, string, StringUnmarshaller, StringUnmarshaller>(StringUnmarshaller.Instance, StringUnmarshaller.Instance);
+                    unmarshalledObject.Tags = unmarshaller.Unmarshall(context);
                     continue;
                 }
                 if (context.TestExpression("timeout", targetDepth))

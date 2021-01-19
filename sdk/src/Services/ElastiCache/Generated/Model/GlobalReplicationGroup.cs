@@ -184,7 +184,7 @@ namespace Amazon.ElastiCache.Model
         /// <summary>
         /// Gets and sets the property EngineVersion. 
         /// <para>
-        /// The Elasticache Redis engine version. For preview, it is Redis version 5.0.5 only.
+        /// The Elasticache Redis engine version.
         /// </para>
         /// </summary>
         public string EngineVersion
@@ -296,6 +296,11 @@ namespace Amazon.ElastiCache.Model
         /// value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable
         /// in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code>
         /// to true when you create a cluster. 
+        /// </para>
+        ///  
+        /// <para>
+        ///  <b>Required:</b> Only available when creating a replication group in an Amazon VPC
+        /// using redis version <code>3.2.6</code>, <code>4.x</code> or later.
         /// </para>
         /// </summary>
         public bool TransitEncryptionEnabled

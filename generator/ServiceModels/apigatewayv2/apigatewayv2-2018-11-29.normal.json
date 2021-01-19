@@ -1882,6 +1882,11 @@
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
         },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
+        },
         "ImportInfo" : {
           "shape" : "__listOf__string",
           "locationName" : "importInfo",
@@ -2204,6 +2209,11 @@
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
         },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
+        },
         "Name" : {
           "shape" : "StringWithLengthBetween1And128",
           "locationName" : "name",
@@ -2346,6 +2356,11 @@
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
         },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
+        },
         "Name" : {
           "shape" : "StringWithLengthBetween1And128",
           "locationName" : "name",
@@ -2427,6 +2442,11 @@
           "shape" : "__boolean",
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
+        },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
         },
         "ImportInfo" : {
           "shape" : "__listOf__string",
@@ -2732,6 +2752,11 @@
           "locationName" : "domainNameConfigurations",
           "documentation" : "<p>The domain name configurations.</p>"
         },
+        "MutualTlsAuthentication" : {
+          "shape" : "MutualTlsAuthenticationInput",
+          "locationName" : "mutualTlsAuthentication",
+          "documentation" : "<p>The mutual TLS authentication configuration for a custom domain name.</p>"
+        },
         "Tags" : {
           "shape" : "Tags",
           "locationName" : "tags",
@@ -2753,6 +2778,11 @@
           "shape" : "DomainNameConfigurations",
           "locationName" : "domainNameConfigurations",
           "documentation" : "<p>The domain name configurations.</p>"
+        },
+        "MutualTlsAuthentication" : {
+          "shape" : "MutualTlsAuthenticationInput",
+          "locationName" : "mutualTlsAuthentication",
+          "documentation" : "<p>The mutual TLS authentication configuration for a custom domain name.</p>"
         },
         "Tags" : {
           "shape" : "Tags",
@@ -2780,6 +2810,11 @@
           "shape" : "DomainNameConfigurations",
           "locationName" : "domainNameConfigurations",
           "documentation" : "<p>The domain name configurations.</p>"
+        },
+        "MutualTlsAuthentication" : {
+          "shape" : "MutualTlsAuthentication",
+          "locationName" : "mutualTlsAuthentication",
+          "documentation" : "<p>The mutual TLS authentication configuration for a custom domain name.</p>"
         },
         "Tags" : {
           "shape" : "Tags",
@@ -2849,12 +2884,17 @@
         "RequestParameters" : {
           "shape" : "IntegrationParameters",
           "locationName" : "requestParameters",
-          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n               , where  <replaceable>{location}</replaceable>  is querystring, path, or header; and <replaceable>{name}</replaceable> must be a valid and unique method request parameter name.</p> <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations with a specified integrationSubtype. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p>"
+          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n               , where \n                  <replaceable>{location}</replaceable>\n                is querystring, path, or header; and \n                  <replaceable>{name}</replaceable>\n                must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "RequestTemplates" : {
           "shape" : "TemplateMap",
           "locationName" : "requestTemplates",
           "documentation" : "<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.</p>"
+        },
+        "ResponseParameters" : {
+          "shape" : "ResponseParameters",
+          "locationName" : "responseParameters",
+          "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients. Specify a key-value map from a selection key to response parameters. The selection key must be a valid HTTP status code within the range of 200-599. Response parameters are a key-value map. The key must match pattern &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or overwrite.statuscode. The action can be append, overwrite or remove. The value can be a static value, or map to response data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "TemplateSelectionExpression" : {
           "shape" : "SelectionExpression",
@@ -2942,12 +2982,17 @@
         "RequestParameters" : {
           "shape" : "IntegrationParameters",
           "locationName" : "requestParameters",
-          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n               , where  <replaceable>{location}</replaceable>  is querystring, path, or header; and <replaceable>{name}</replaceable> must be a valid and unique method request parameter name.</p> <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations with a specified integrationSubtype. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p>"
+          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n               , where \n                  <replaceable>{location}</replaceable>\n                is querystring, path, or header; and \n                  <replaceable>{name}</replaceable>\n                must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "RequestTemplates" : {
           "shape" : "TemplateMap",
           "locationName" : "requestTemplates",
           "documentation" : "<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.</p>"
+        },
+        "ResponseParameters" : {
+          "shape" : "ResponseParameters",
+          "locationName" : "responseParameters",
+          "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients. Specify a key-value map from a selection key to response parameters. The selection key must be a valid HTTP status code within the range of 200-599. Response parameters are a key-value map. The key must match pattern &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or overwrite.statuscode. The action can be append, overwrite or remove. The value can be a static value, or map to response data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "TemplateSelectionExpression" : {
           "shape" : "SelectionExpression",
@@ -3044,12 +3089,17 @@
         "RequestParameters" : {
           "shape" : "IntegrationParameters",
           "locationName" : "requestParameters",
-          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n              , where  <replaceable>{location}</replaceable>  is querystring, path, or header; and <replaceable>{name}</replaceable> must be a valid and unique method request parameter name.</p> <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations with a specified integrationSubtype. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p>"
+          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API itegrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "RequestTemplates" : {
           "shape" : "TemplateMap",
           "locationName" : "requestTemplates",
           "documentation" : "<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.</p>"
+        },
+        "ResponseParameters" : {
+          "shape" : "ResponseParameters",
+          "locationName" : "responseParameters",
+          "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients. Specify a key-value map from a selection key to response parameters. The selection key must be a valid HTTP status code within the range of 200-599. Response parameters are a key-value map. The key must match pattern &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or overwrite.statuscode. The action can be append, overwrite or remove. The value can be a static value, or map to response data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "TemplateSelectionExpression" : {
           "shape" : "SelectionExpression",
@@ -4231,6 +4281,11 @@
           "locationName" : "domainNameConfigurations",
           "documentation" : "<p>The domain name configurations.</p>"
         },
+        "MutualTlsAuthentication" : {
+          "shape" : "MutualTlsAuthentication",
+          "locationName" : "mutualTlsAuthentication",
+          "documentation" : "<p>The mutual TLS authentication configuration for a custom domain name.</p>"
+        },
         "Tags" : {
           "shape" : "Tags",
           "locationName" : "tags",
@@ -4535,6 +4590,11 @@
           "shape" : "__boolean",
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
+        },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
         },
         "ImportInfo" : {
           "shape" : "__listOf__string",
@@ -4844,6 +4904,11 @@
           "locationName" : "domainNameConfigurations",
           "documentation" : "<p>The domain name configurations.</p>"
         },
+        "MutualTlsAuthentication" : {
+          "shape" : "MutualTlsAuthentication",
+          "locationName" : "mutualTlsAuthentication",
+          "documentation" : "<p>The mutual TLS authentication configuration for a custom domain name.</p>"
+        },
         "Tags" : {
           "shape" : "Tags",
           "locationName" : "tags",
@@ -4977,12 +5042,17 @@
         "RequestParameters" : {
           "shape" : "IntegrationParameters",
           "locationName" : "requestParameters",
-          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n              , where  <replaceable>{location}</replaceable>  is querystring, path, or header; and <replaceable>{name}</replaceable> must be a valid and unique method request parameter name.</p> <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations with a specified integrationSubtype. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p>"
+          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API itegrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "RequestTemplates" : {
           "shape" : "TemplateMap",
           "locationName" : "requestTemplates",
           "documentation" : "<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.</p>"
+        },
+        "ResponseParameters" : {
+          "shape" : "ResponseParameters",
+          "locationName" : "responseParameters",
+          "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients. Specify a key-value map from a selection key to response parameters. The selection key must be a valid HTTP status code within the range of 200-599. Response parameters are a key-value map. The key must match pattern &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or overwrite.statuscode. The action can be append, overwrite or remove. The value can be a static value, or map to response data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "TemplateSelectionExpression" : {
           "shape" : "SelectionExpression",
@@ -5822,6 +5892,11 @@
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
         },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
+        },
         "ImportInfo" : {
           "shape" : "__listOf__string",
           "locationName" : "importInfo",
@@ -5953,12 +6028,17 @@
         "RequestParameters" : {
           "shape" : "IntegrationParameters",
           "locationName" : "requestParameters",
-          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n              , where  <replaceable>{location}</replaceable>  is querystring, path, or header; and <replaceable>{name}</replaceable> must be a valid and unique method request parameter name.</p> <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations with a specified integrationSubtype. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p>"
+          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API itegrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "RequestTemplates" : {
           "shape" : "TemplateMap",
           "locationName" : "requestTemplates",
           "documentation" :  "<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.</p>"
+        },
+        "ResponseParameters" : {
+          "shape" : "ResponseParameters",
+          "locationName" : "responseParameters",
+          "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients. Specify a key-value map from a selection key to response parameters. The selection key must be a valid HTTP status code within the range of 200-599. Response parameters are a key-value map. The key must match pattern &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or overwrite.statuscode. The action can be append, overwrite or remove. The value can be a static value, or map to response data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "TemplateSelectionExpression" : {
           "shape" : "SelectionExpression",
@@ -5980,7 +6060,7 @@
     },
     "IntegrationParameters" : {
       "type" : "map",
-      "documentation" : "<p>A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.</p>",
+      "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>",
       "key" : {
         "shape" : "__string"
       },
@@ -6147,6 +6227,41 @@
       },
       "documentation" : "<p>Represents a collection of data models. See <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html\">Create Models and Mapping Templates for Request and Response Mappings</a>.</p>"
     },
+    "MutualTlsAuthentication" : {
+      "type" : "structure",
+      "members" : {
+        "TruststoreUri" : {
+          "shape" : "UriWithLengthBetween1And2048",
+          "locationName" : "truststoreUri",
+          "documentation" : "<p>An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://<replaceable>bucket-name</replaceable>/<replaceable>key-name</replaceable>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.</p>"
+        },
+        "TruststoreVersion" : {
+          "shape" : "StringWithLengthBetween1And64",
+          "locationName" : "truststoreVersion",
+          "documentation" : "<p>The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.</p>"
+        },
+        "TruststoreWarnings" : {
+          "shape" : "__listOf__string",
+          "locationName" : "truststoreWarnings",
+          "documentation" : "<p>A list of warnings that API Gateway returns while processing your truststore. Invalid certificates produce warnings. Mutual TLS is still enabled, but some clients might not be able to access your API. To resolve warnings, upload a new truststore to S3, and then update you domain name to use the new version.</p>"
+        }
+      }
+    },
+    "MutualTlsAuthenticationInput" : {
+      "type" : "structure",
+      "members" : {
+        "TruststoreUri" : {
+          "shape" : "UriWithLengthBetween1And2048",
+          "locationName" : "truststoreUri",
+          "documentation" : "<p>An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://<replaceable>bucket-name</replaceable>/<replaceable>key-name</replaceable>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.</p>"
+        },
+        "TruststoreVersion" : {
+          "shape" : "StringWithLengthBetween1And64",
+          "locationName" : "truststoreVersion",
+          "documentation" : "<p>The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.</p>"
+        }
+      }
+    },
     "NextToken" : {
       "type" : "string",
       "documentation" : "<p>The next page of elements from this collection. Not valid for the last element of the collection.</p>"
@@ -6277,6 +6392,11 @@
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
         },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
+        },
         "ImportInfo" : {
           "shape" : "__listOf__string",
           "locationName" : "importInfo",
@@ -6312,6 +6432,16 @@
           "locationName" : "warnings",
           "documentation" : "<p>The warning messages reported when failonwarnings is turned on during API import.</p>"
         }
+      }
+    },
+    "ResponseParameters" : {
+      "type" : "map",
+      "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients.</p>",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "IntegrationParameters"
       }
     },
     "Route" : {
@@ -6824,6 +6954,11 @@
           "locationName" : "description",
           "documentation" : "<p>The description of the API.</p>"
         },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
+        },
         "DisableSchemaValidation" : {
           "shape" : "__boolean",
           "locationName" : "disableSchemaValidation",
@@ -6959,7 +7094,7 @@
         "CredentialsArn" : {
           "shape" : "Arn",
           "locationName" : "credentialsArn",
-          "documentation" : "<p>This property is part of quick create. It specifies the credentials required for the integration, if any. For a Lambda integration, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null. Currently, this property is not used for HTTP integrations. If provided, this value replaces the credentials associated with the quick create integration. Supported only for HTTP APIs.</p>"
+          "documentation" : "<p>This property is part of quick create. It specifies the credentials required for the integration, if any. For a Lambda integration, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, don't specify this parameter. Currently, this property is not used for HTTP integrations. If provided, this value replaces the credentials associated with the quick create integration. Supported only for HTTP APIs.</p>"
         },
         "Description" : {
           "shape" : "StringWithLengthBetween0And1024",
@@ -6970,6 +7105,11 @@
           "shape" : "__boolean",
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
+        },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
         },
         "Name" : {
           "shape" : "StringWithLengthBetween1And128",
@@ -7042,6 +7182,11 @@
           "shape" : "__boolean",
           "locationName" : "disableSchemaValidation",
           "documentation" : "<p>Avoid validating models when creating a deployment. Supported only for WebSocket APIs.</p>"
+        },
+        "DisableExecuteApiEndpoint" : {
+          "shape" : "__boolean",
+          "locationName" : "disableExecuteApiEndpoint",
+          "documentation" : "<p>Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.</p>"
         },
         "ImportInfo" : {
           "shape" : "__listOf__string",
@@ -7342,6 +7487,11 @@
           "shape" : "DomainNameConfigurations",
           "locationName" : "domainNameConfigurations",
           "documentation" : "<p>The domain name configurations.</p>"
+        },
+        "MutualTlsAuthentication" : {
+          "shape" : "MutualTlsAuthenticationInput",
+          "locationName" : "mutualTlsAuthentication",
+          "documentation" : "<p>The mutual TLS authentication configuration for a custom domain name.</p>"
         }
       },
       "documentation" : "<p>Represents the input parameters for an UpdateDomainName request.</p>"
@@ -7359,6 +7509,11 @@
           "shape" : "DomainNameConfigurations",
           "locationName" : "domainNameConfigurations",
           "documentation" : "<p>The domain name configurations.</p>"
+        },
+        "MutualTlsAuthentication" : {
+          "shape" : "MutualTlsAuthenticationInput",
+          "locationName" : "mutualTlsAuthentication",
+          "documentation" : "<p>The mutual TLS authentication configuration for a custom domain name.</p>"
         }
       },
       "documentation" : "<p>Updates a DomainName.</p>",
@@ -7381,6 +7536,11 @@
           "shape" : "DomainNameConfigurations",
           "locationName" : "domainNameConfigurations",
           "documentation" : "<p>The domain name configurations.</p>"
+        },
+        "MutualTlsAuthentication" : {
+          "shape" : "MutualTlsAuthentication",
+          "locationName" : "mutualTlsAuthentication",
+          "documentation" : "<p>The mutual TLS authentication configuration for a custom domain name.</p>"
         },
         "Tags" : {
           "shape" : "Tags",
@@ -7450,12 +7610,17 @@
         "RequestParameters" : {
           "shape" : "IntegrationParameters",
           "locationName" : "requestParameters",
-          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n              , where  <replaceable>{location}</replaceable>  is querystring, path, or header; and <replaceable>{name}</replaceable> must be a valid and unique method request parameter name.</p> <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations with a specified integrationSubtype. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p>"
+          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.\">Transforming API requests and responses</a>.</p>"
         },
         "RequestTemplates" : {
           "shape" : "TemplateMap",
           "locationName" : "requestTemplates",
           "documentation" : "<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.</p>"
+        },
+        "ResponseParameters" : {
+          "shape" : "ResponseParameters",
+          "locationName" : "responseParameters",
+          "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients. Specify a key-value map from a selection key to response parameters. The selection key must be a valid HTTP status code within the range of 200-599. Response parameters are a key-value map. The key must match pattern &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or overwrite.statuscode. The action can be append, overwrite or remove. The value can be a static value, or map to response data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "TemplateSelectionExpression" : {
           "shape" : "SelectionExpression",
@@ -7548,12 +7713,17 @@
         "RequestParameters" : {
           "shape" : "IntegrationParameters",
           "locationName" : "requestParameters",
-          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n              , where  <replaceable>{location}</replaceable>  is querystring, path, or header; and <replaceable>{name}</replaceable> must be a valid and unique method request parameter name.</p> <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations with a specified integrationSubtype. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p>"
+          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API integrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to the backend. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt; where action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.\">Transforming API requests and responses</a>.</p>"
         },
         "RequestTemplates" : {
           "shape" : "TemplateMap",
           "locationName" : "requestTemplates",
           "documentation" : "<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.</p>"
+        },
+        "ResponseParameters" : {
+          "shape" : "ResponseParameters",
+          "locationName" : "responseParameters",
+          "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients. Specify a key-value map from a selection key to response parameters. The selection key must be a valid HTTP status code within the range of 200-599. Response parameters are a key-value map. The key must match pattern &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or overwrite.statuscode. The action can be append, overwrite or remove. The value can be a static value, or map to response data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "TemplateSelectionExpression" : {
           "shape" : "SelectionExpression",
@@ -7650,12 +7820,17 @@
         "RequestParameters" : {
           "shape" : "IntegrationParameters",
           "locationName" : "requestParameters",
-          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n              , where  <replaceable>{location}</replaceable>  is querystring, path, or header; and <replaceable>{name}</replaceable> must be a valid and unique method request parameter name.</p> <p>For HTTP APIs, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations with a specified integrationSubtype. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p>"
+          "documentation" : "<p>For WebSocket APIs, a key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.<replaceable>{location}</replaceable>.<replaceable>{name}</replaceable>\n          , where \n            <replaceable>{location}</replaceable>\n           is querystring, path, or header; and \n            <replaceable>{name}</replaceable>\n           must be a valid and unique method request parameter name.</p> <p>For HTTP API integrations with a specified integrationSubtype, request parameters are a key-value map specifying parameters that are passed to AWS_PROXY integrations. You can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html\">Working with AWS service integrations for HTTP APIs</a>.</p> <p>For HTTP API itegrations, without a specified integrationSubtype request parameters are a key-value map specifying how to transform HTTP requests before sending them to backend integrations. The key should follow the pattern &lt;action&gt;:&lt;header|querystring|path&gt;.&lt;location&gt;. The action can be append, overwrite or remove. For values, you can provide static values, or map request data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "RequestTemplates" : {
           "shape" : "TemplateMap",
           "locationName" : "requestTemplates",
           "documentation" : "<p>Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value. Supported only for WebSocket APIs.</p>"
+        },
+        "ResponseParameters" : {
+          "shape" : "ResponseParameters",
+          "locationName" : "responseParameters",
+          "documentation" : "<p>Supported only for HTTP APIs. You use response parameters to transform the HTTP response from a backend integration before returning the response to clients. Specify a key-value map from a selection key to response parameters. The selection key must be a valid HTTP status code within the range of 200-599. Response parameters are a key-value map. The key must match pattern &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or overwrite.statuscode. The action can be append, overwrite or remove. The value can be a static value, or map to response data, stage variables, or context variables that are evaluated at runtime. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html\">Transforming API requests and responses</a>.</p>"
         },
         "TemplateSelectionExpression" : {
           "shape" : "SelectionExpression",
@@ -8285,7 +8460,7 @@
           "shape" : "__string",
           "location" : "uri",
           "locationName" : "stageName",
-          "documentation" : "<p>The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.</p>"
+          "documentation" : "<p>The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.</p>"
         },
         "StageVariables" : {
           "shape" : "StageVariablesMap",

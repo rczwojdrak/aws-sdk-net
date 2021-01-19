@@ -56,6 +56,9 @@ namespace Amazon.StepFunctions
     /// Functions Developer Guide</a> </i>.
     /// </para>
     /// </summary>
+#if NETSTANDARD13
+    [Obsolete("Support for .NET Standard 1.3 is in maintenance mode and will only receive critical bug fixes and security patches. Visit https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/migration-from-net-standard-1-3.html for further details.")]
+#endif
     public partial interface IAmazonStepFunctions : IAmazonService, IDisposable
     {
 #if AWS_ASYNC_ENUMERABLES_API
@@ -768,6 +771,42 @@ namespace Amazon.StepFunctions
         /// </exception>
         /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecution">REST API Reference for StartExecution Operation</seealso>
         Task<StartExecutionResponse> StartExecutionAsync(StartExecutionRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
+
+        #endregion
+                
+        #region  StartSyncExecution
+
+
+
+        /// <summary>
+        /// Starts a Synchronous Express state machine execution.
+        /// </summary>
+        /// <param name="request">Container for the necessary parameters to execute the StartSyncExecution service method.</param>
+        /// <param name="cancellationToken">
+        ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
+        /// </param>
+        /// 
+        /// <returns>The response from the StartSyncExecution service method, as returned by StepFunctions.</returns>
+        /// <exception cref="Amazon.StepFunctions.Model.InvalidArnException">
+        /// The provided Amazon Resource Name (ARN) is invalid.
+        /// </exception>
+        /// <exception cref="Amazon.StepFunctions.Model.InvalidExecutionInputException">
+        /// The provided JSON input data is invalid.
+        /// </exception>
+        /// <exception cref="Amazon.StepFunctions.Model.InvalidNameException">
+        /// The provided name is invalid.
+        /// </exception>
+        /// <exception cref="Amazon.StepFunctions.Model.StateMachineDeletingException">
+        /// The specified state machine is being deleted.
+        /// </exception>
+        /// <exception cref="Amazon.StepFunctions.Model.StateMachineDoesNotExistException">
+        /// The specified state machine does not exist.
+        /// </exception>
+        /// <exception cref="Amazon.StepFunctions.Model.StateMachineTypeNotSupportedException">
+        /// 
+        /// </exception>
+        /// <seealso href="http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartSyncExecution">REST API Reference for StartSyncExecution Operation</seealso>
+        Task<StartSyncExecutionResponse> StartSyncExecutionAsync(StartSyncExecutionRequest request, System.Threading.CancellationToken cancellationToken = default(CancellationToken));
 
         #endregion
                 

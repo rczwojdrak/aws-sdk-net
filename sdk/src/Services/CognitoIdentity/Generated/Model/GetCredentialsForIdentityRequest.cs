@@ -25,6 +25,7 @@ using System.Net;
 
 using Amazon.Runtime;
 using Amazon.Runtime.Internal;
+using Amazon.Runtime.Internal.Auth;
 
 namespace Amazon.CognitoIdentity.Model
 {
@@ -101,8 +102,8 @@ namespace Amazon.CognitoIdentity.Model
         ///  
         /// <para>
         /// The Logins parameter is required when using identities associated with external identity
-        /// providers such as FaceBook. For examples of <code>Logins</code> maps, see the code
-        /// examples in the <a href="http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html">External
+        /// providers such as Facebook. For examples of <code>Logins</code> maps, see the code
+        /// examples in the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html">External
         /// Identity Providers</a> section of the Amazon Cognito Developer Guide.
         /// </para>
         /// </summary>
@@ -119,5 +120,13 @@ namespace Amazon.CognitoIdentity.Model
             return this._logins != null && this._logins.Count > 0; 
         }
 
+        /// <summary>
+        /// Get the signer to use for this request.
+        /// </summary>
+        /// <returns>A signer for this request.</returns>
+        override protected AbstractAWSSigner CreateSigner()
+        {
+            return new NullSigner();
+        }
     }
 }

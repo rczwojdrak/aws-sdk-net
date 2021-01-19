@@ -44,7 +44,9 @@ namespace Amazon.Glue.Model
         private string _description;
         private LastCrawlInfo _lastCrawl;
         private DateTime? _lastUpdated;
+        private LineageConfiguration _lineageConfiguration;
         private string _name;
+        private RecrawlPolicy _recrawlPolicy;
         private string _role;
         private Schedule _schedule;
         private SchemaChangePolicy _schemaChangePolicy;
@@ -221,6 +223,24 @@ namespace Amazon.Glue.Model
         }
 
         /// <summary>
+        /// Gets and sets the property LineageConfiguration. 
+        /// <para>
+        /// A configuration that specifies whether data lineage is enabled for the crawler.
+        /// </para>
+        /// </summary>
+        public LineageConfiguration LineageConfiguration
+        {
+            get { return this._lineageConfiguration; }
+            set { this._lineageConfiguration = value; }
+        }
+
+        // Check to see if LineageConfiguration property is set
+        internal bool IsSetLineageConfiguration()
+        {
+            return this._lineageConfiguration != null;
+        }
+
+        /// <summary>
         /// Gets and sets the property Name. 
         /// <para>
         /// The name of the crawler.
@@ -237,6 +257,25 @@ namespace Amazon.Glue.Model
         internal bool IsSetName()
         {
             return this._name != null;
+        }
+
+        /// <summary>
+        /// Gets and sets the property RecrawlPolicy. 
+        /// <para>
+        /// A policy that specifies whether to crawl the entire dataset again, or to crawl only
+        /// folders that were added since the last crawler run.
+        /// </para>
+        /// </summary>
+        public RecrawlPolicy RecrawlPolicy
+        {
+            get { return this._recrawlPolicy; }
+            set { this._recrawlPolicy = value; }
+        }
+
+        // Check to see if RecrawlPolicy property is set
+        internal bool IsSetRecrawlPolicy()
+        {
+            return this._recrawlPolicy != null;
         }
 
         /// <summary>

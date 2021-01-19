@@ -70,6 +70,12 @@ namespace Amazon.Pinpoint.Model.Internal.MarshallTransformations
                     unmarshalledObject.Description = unmarshaller.Unmarshall(context);
                     continue;
                 }
+                if (context.TestExpression("EventStartCondition", targetDepth))
+                {
+                    var unmarshaller = EventStartConditionUnmarshaller.Instance;
+                    unmarshalledObject.EventStartCondition = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("SegmentStartCondition", targetDepth))
                 {
                     var unmarshaller = SegmentConditionUnmarshaller.Instance;

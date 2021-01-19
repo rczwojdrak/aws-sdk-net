@@ -69,6 +69,8 @@ namespace Amazon.S3.Model
         private string copySourceServerSideEncryptionCustomerProvidedKey;
         private string copySourceServerSideEncryptionCustomerProvidedKeyMD5;
 
+        private bool? bucketKeyEnabled;
+
 
         /// <summary>
         /// The name of the bucket containing the object to copy.
@@ -133,7 +135,17 @@ namespace Amazon.S3.Model
         }
 
         /// <summary>
-        /// The name of the bucket to contain the copy of the source object.
+        /// <para>The name of the destination bucket.</para> 
+        /// <para>When using this API with an access point, you must direct requests to the access point hostname. 
+        /// The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. 
+        /// When using this operation with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. 
+        /// For more information about access point ARNs, see 
+        /// <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html">Using Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</para> 
+        /// <para>When using this API with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. 
+        /// The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. 
+        /// When using this operation using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. 
+        /// For more information about S3 on Outposts ARNs, see 
+        /// <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html">Using S3 on Outposts</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</para>
         /// </summary>
         public string DestinationBucket
         {
@@ -178,6 +190,7 @@ namespace Amazon.S3.Model
         /// A canned access control list (CACL) to apply to the object.
         /// Please refer to <see cref="T:Amazon.S3.S3CannedACL"/> for
         /// information on S3 Canned ACLs.
+        /// <para>This action is not supported by Amazon S3 on Outposts.</para>
         /// </summary>
         public S3CannedACL CannedACL
         {
@@ -483,8 +496,10 @@ namespace Amazon.S3.Model
         }
 
         /// <summary>
-        /// The type of storage to use for the object. Defaults to 'STANDARD'.
-        ///  
+        /// <para>By default, Amazon S3 uses the STANDARD Storage Class to store newly created objects. The STANDARD storage class provides high durability and high availability. 
+        /// Depending on performance needs, you can specify a different Storage Class. 
+        /// Amazon S3 on Outposts only uses the OUTPOSTS Storage Class. For more information, see 
+        /// <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html">Storage Classes</a> in the <i>Amazon S3 Service Developer Guide</i>.</para>
         /// </summary>
         public S3StorageClass StorageClass
         {
@@ -744,6 +759,23 @@ namespace Amazon.S3.Model
         internal bool IsSetExpectedSourceBucketOwner()
         {
             return !String.IsNullOrEmpty(this.expectedSourceBucketOwner);
+        }
+
+        /// <summary>
+        /// <para>Specifies whether Amazon S3 should use bucket key for object encryption 
+        /// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to <code>true</code> causes 
+        /// Amazon S3 to use bucket key for object encryption with SSE-KMS. </para> 
+        /// <para>Specifying this header with a COPY operation doesn’t affect bucket-level settings for bucket key.</para>
+        /// </summary>
+        public bool BucketKeyEnabled
+        {
+            get { return this.bucketKeyEnabled.GetValueOrDefault(); }
+            set { this.bucketKeyEnabled = value; }
+        }
+
+        internal bool IsSetBucketKeyEnabled()
+        {
+            return bucketKeyEnabled.HasValue;
         }
     }
 }

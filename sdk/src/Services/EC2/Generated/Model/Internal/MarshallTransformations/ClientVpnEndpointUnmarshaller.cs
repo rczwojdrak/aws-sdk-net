@@ -74,6 +74,12 @@ namespace Amazon.EC2.Model.Internal.MarshallTransformations
                         unmarshalledObject.ClientCidrBlock = unmarshaller.Unmarshall(context);
                         continue;
                     }
+                    if (context.TestExpression("clientConnectOptions", targetDepth))
+                    {
+                        var unmarshaller = ClientConnectResponseOptionsUnmarshaller.Instance;
+                        unmarshalledObject.ClientConnectOptions = unmarshaller.Unmarshall(context);
+                        continue;
+                    }
                     if (context.TestExpression("clientVpnEndpointId", targetDepth))
                     {
                         var unmarshaller = StringUnmarshaller.Instance;
@@ -122,6 +128,12 @@ namespace Amazon.EC2.Model.Internal.MarshallTransformations
                         var unmarshaller = StringUnmarshaller.Instance;
                         var item = unmarshaller.Unmarshall(context);
                         unmarshalledObject.SecurityGroupIds.Add(item);
+                        continue;
+                    }
+                    if (context.TestExpression("selfServicePortalUrl", targetDepth))
+                    {
+                        var unmarshaller = StringUnmarshaller.Instance;
+                        unmarshalledObject.SelfServicePortalUrl = unmarshaller.Unmarshall(context);
                         continue;
                     }
                     if (context.TestExpression("serverCertificateArn", targetDepth))

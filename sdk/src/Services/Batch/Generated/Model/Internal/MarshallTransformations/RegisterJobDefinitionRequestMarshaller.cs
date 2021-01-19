@@ -108,6 +108,23 @@ namespace Amazon.Batch.Model.Internal.MarshallTransformations
                     context.Writer.WriteObjectEnd();
                 }
 
+                if(publicRequest.IsSetPlatformCapabilities())
+                {
+                    context.Writer.WritePropertyName("platformCapabilities");
+                    context.Writer.WriteArrayStart();
+                    foreach(var publicRequestPlatformCapabilitiesListValue in publicRequest.PlatformCapabilities)
+                    {
+                            context.Writer.Write(publicRequestPlatformCapabilitiesListValue);
+                    }
+                    context.Writer.WriteArrayEnd();
+                }
+
+                if(publicRequest.IsSetPropagateTags())
+                {
+                    context.Writer.WritePropertyName("propagateTags");
+                    context.Writer.Write(publicRequest.PropagateTags);
+                }
+
                 if(publicRequest.IsSetRetryStrategy())
                 {
                     context.Writer.WritePropertyName("retryStrategy");
@@ -116,6 +133,20 @@ namespace Amazon.Batch.Model.Internal.MarshallTransformations
                     var marshaller = RetryStrategyMarshaller.Instance;
                     marshaller.Marshall(publicRequest.RetryStrategy, context);
 
+                    context.Writer.WriteObjectEnd();
+                }
+
+                if(publicRequest.IsSetTags())
+                {
+                    context.Writer.WritePropertyName("tags");
+                    context.Writer.WriteObjectStart();
+                    foreach (var publicRequestTagsKvp in publicRequest.Tags)
+                    {
+                        context.Writer.WritePropertyName(publicRequestTagsKvp.Key);
+                        var publicRequestTagsValue = publicRequestTagsKvp.Value;
+
+                            context.Writer.Write(publicRequestTagsValue);
+                    }
                     context.Writer.WriteObjectEnd();
                 }
 

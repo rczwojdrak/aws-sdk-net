@@ -34,6 +34,7 @@ namespace Amazon.Imagebuilder.Model
     public partial class Distribution
     {
         private AmiDistributionConfiguration _amiDistributionConfiguration;
+        private ContainerDistributionConfiguration _containerDistributionConfiguration;
         private List<string> _licenseConfigurationArns = new List<string>();
         private string _region;
 
@@ -56,11 +57,31 @@ namespace Amazon.Imagebuilder.Model
         }
 
         /// <summary>
+        /// Gets and sets the property ContainerDistributionConfiguration. 
+        /// <para>
+        /// Container distribution settings for encryption, licensing, and sharing in a specific
+        /// Region.
+        /// </para>
+        /// </summary>
+        public ContainerDistributionConfiguration ContainerDistributionConfiguration
+        {
+            get { return this._containerDistributionConfiguration; }
+            set { this._containerDistributionConfiguration = value; }
+        }
+
+        // Check to see if ContainerDistributionConfiguration property is set
+        internal bool IsSetContainerDistributionConfiguration()
+        {
+            return this._containerDistributionConfiguration != null;
+        }
+
+        /// <summary>
         /// Gets and sets the property LicenseConfigurationArns. 
         /// <para>
         /// The License Manager Configuration to associate with the AMI in the specified Region.
         /// </para>
         /// </summary>
+        [AWSProperty(Min=1, Max=50)]
         public List<string> LicenseConfigurationArns
         {
             get { return this._licenseConfigurationArns; }

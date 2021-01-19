@@ -36,6 +36,7 @@ namespace Amazon.Schemas.Model
         private string _schemaArn;
         private string _schemaName;
         private string _schemaVersion;
+        private Type _type;
 
         /// <summary>
         /// Gets and sets the property SchemaArn. 
@@ -89,6 +90,24 @@ namespace Amazon.Schemas.Model
         internal bool IsSetSchemaVersion()
         {
             return this._schemaVersion != null;
+        }
+
+        /// <summary>
+        /// Gets and sets the property Type. 
+        /// <para>
+        /// The type of schema.
+        /// </para>
+        /// </summary>
+        public Type Type
+        {
+            get { return this._type; }
+            set { this._type = value; }
+        }
+
+        // Check to see if Type property is set
+        internal bool IsSetType()
+        {
+            return this._type != null;
         }
 
     }

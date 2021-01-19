@@ -43,10 +43,16 @@ namespace Amazon.SimpleNotificationService
     /// Amazon Simple Notification Service (Amazon SNS) is a web service that enables you
     /// to build distributed web-enabled applications. Applications can use Amazon SNS to
     /// easily push real-time notification messages to interested subscribers over multiple
-    /// delivery protocols. For more information about this product see <a href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>.
-    /// For detailed information about Amazon SNS features and their associated API calls,
-    /// see the <a href="https://docs.aws.amazon.com/sns/latest/dg/">Amazon SNS Developer
-    /// Guide</a>. 
+    /// delivery protocols. For more information about this product see the <a href="http://aws.amazon.com/sns/">Amazon
+    /// SNS product page</a>. For detailed information about Amazon SNS features and their
+    /// associated API calls, see the <a href="https://docs.aws.amazon.com/sns/latest/dg/">Amazon
+    /// SNS Developer Guide</a>. 
+    /// </para>
+    ///  
+    /// <para>
+    /// For information on the permissions you need to use this API, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-authentication-and-access-control.html">Identity
+    /// and access management in Amazon SNS</a> in the <i>Amazon SNS Developer Guide.</i>
+    /// 
     /// </para>
     ///  
     /// <para>
@@ -1000,11 +1006,12 @@ namespace Amazon.SimpleNotificationService
 
         /// <summary>
         /// Creates a topic to which notifications can be published. Users can create at most
-        /// 100,000 topics. For more information, see <a href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>.
-        /// This action is idempotent, so if the requester already owns a topic with the specified
-        /// name, that topic's ARN is returned without creating a new topic.
+        /// 100,000 standard topics (at most 1,000 FIFO topics). For more information, see <a
+        /// href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>. This action is idempotent,
+        /// so if the requester already owns a topic with the specified name, that topic's ARN
+        /// is returned without creating a new topic.
         /// </summary>
-        /// <param name="name">The name of the topic you want to create. Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long.</param>
+        /// <param name="name">The name of the topic you want to create. Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long. For a FIFO (first-in-first-out) topic, the name must end with the <code>.fifo</code> suffix. </param>
         /// 
         /// <returns>The response from the CreateTopic service method, as returned by SimpleNotificationService.</returns>
         /// <exception cref="Amazon.SimpleNotificationService.Model.AuthorizationErrorException">
@@ -1049,9 +1056,10 @@ namespace Amazon.SimpleNotificationService
 
         /// <summary>
         /// Creates a topic to which notifications can be published. Users can create at most
-        /// 100,000 topics. For more information, see <a href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>.
-        /// This action is idempotent, so if the requester already owns a topic with the specified
-        /// name, that topic's ARN is returned without creating a new topic.
+        /// 100,000 standard topics (at most 1,000 FIFO topics). For more information, see <a
+        /// href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>. This action is idempotent,
+        /// so if the requester already owns a topic with the specified name, that topic's ARN
+        /// is returned without creating a new topic.
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the CreateTopic service method.</param>
         /// 
@@ -1100,11 +1108,12 @@ namespace Amazon.SimpleNotificationService
 
         /// <summary>
         /// Creates a topic to which notifications can be published. Users can create at most
-        /// 100,000 topics. For more information, see <a href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>.
-        /// This action is idempotent, so if the requester already owns a topic with the specified
-        /// name, that topic's ARN is returned without creating a new topic.
+        /// 100,000 standard topics (at most 1,000 FIFO topics). For more information, see <a
+        /// href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>. This action is idempotent,
+        /// so if the requester already owns a topic with the specified name, that topic's ARN
+        /// is returned without creating a new topic.
         /// </summary>
-        /// <param name="name">The name of the topic you want to create. Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long.</param>
+        /// <param name="name">The name of the topic you want to create. Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long. For a FIFO (first-in-first-out) topic, the name must end with the <code>.fifo</code> suffix. </param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
         /// </param>
@@ -1152,9 +1161,10 @@ namespace Amazon.SimpleNotificationService
 
         /// <summary>
         /// Creates a topic to which notifications can be published. Users can create at most
-        /// 100,000 topics. For more information, see <a href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>.
-        /// This action is idempotent, so if the requester already owns a topic with the specified
-        /// name, that topic's ARN is returned without creating a new topic.
+        /// 100,000 standard topics (at most 1,000 FIFO topics). For more information, see <a
+        /// href="http://aws.amazon.com/sns/">https://aws.amazon.com/sns</a>. This action is idempotent,
+        /// so if the requester already owns a topic with the specified name, that topic's ARN
+        /// is returned without creating a new topic.
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the CreateTopic service method.</param>
         /// <param name="cancellationToken">
@@ -3998,9 +4008,15 @@ namespace Amazon.SimpleNotificationService
         /// <para>
         /// You can override some of these settings for a single message when you use the <code>Publish</code>
         /// action with the <code>MessageAttributes.entry.N</code> parameter. For more information,
-        /// see <a href="https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html">Sending
-        /// an SMS Message</a> in the <i>Amazon SNS Developer Guide</i>.
+        /// see <a href="https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html">Publishing
+        /// to a mobile phone</a> in the <i>Amazon SNS Developer Guide</i>.
         /// </para>
+        ///  <note> 
+        /// <para>
+        /// To use this operation, you must grant the Amazon SNS service principal (<code>sns.amazonaws.com</code>)
+        /// permission to perform the <code>s3:ListBucket</code> action. 
+        /// </para>
+        ///  </note>
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the SetSMSAttributes service method.</param>
         /// 
@@ -4037,9 +4053,15 @@ namespace Amazon.SimpleNotificationService
         /// <para>
         /// You can override some of these settings for a single message when you use the <code>Publish</code>
         /// action with the <code>MessageAttributes.entry.N</code> parameter. For more information,
-        /// see <a href="https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html">Sending
-        /// an SMS Message</a> in the <i>Amazon SNS Developer Guide</i>.
+        /// see <a href="https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html">Publishing
+        /// to a mobile phone</a> in the <i>Amazon SNS Developer Guide</i>.
         /// </para>
+        ///  <note> 
+        /// <para>
+        /// To use this operation, you must grant the Amazon SNS service principal (<code>sns.amazonaws.com</code>)
+        /// permission to perform the <code>s3:ListBucket</code> action. 
+        /// </para>
+        ///  </note>
         /// </summary>
         /// <param name="request">Container for the necessary parameters to execute the SetSMSAttributes service method.</param>
         /// <param name="cancellationToken">
@@ -4079,7 +4101,7 @@ namespace Amazon.SimpleNotificationService
         /// Allows a subscription owner to set an attribute of the subscription to a new value.
         /// </summary>
         /// <param name="subscriptionArn">The ARN of the subscription to modify.</param>
-        /// <param name="attributeName">A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses: <ul> <li>  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints. </li> <li>  <code>FilterPolicy</code> – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic. </li> <li>  <code>RawMessageDelivery</code> – When set to <code>true</code>, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata. </li> <li>  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable) or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held in the dead-letter queue for further analysis or reprocessing. </li> </ul></param>
+        /// <param name="attributeName">A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that this action uses: <ul> <li>  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints. </li> <li>  <code>FilterPolicy</code> – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic. </li> <li>  <code>RawMessageDelivery</code> – When set to <code>true</code>, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata. </li> <li>  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable) or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held in the dead-letter queue for further analysis or reprocessing. </li> </ul> The following attribute applies only to Amazon Kinesis Data Firehose delivery stream subscriptions: <ul> <li>  <code>SubscriptionRoleArn</code> – The ARN of the IAM role that has the following: <ul> <li> Permission to write to the Kinesis Data Firehose delivery stream </li> <li> Amazon SNS listed as a trusted entity </li> </ul> Specifying a valid ARN for this attribute is required for Kinesis Data Firehose delivery stream subscriptions. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html">Fanout to Kinesis Data Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>. </li> </ul></param>
         /// <param name="attributeValue">The new value for the attribute in JSON format.</param>
         /// 
         /// <returns>The response from the SetSubscriptionAttributes service method, as returned by SimpleNotificationService.</returns>
@@ -4147,7 +4169,7 @@ namespace Amazon.SimpleNotificationService
         /// Allows a subscription owner to set an attribute of the subscription to a new value.
         /// </summary>
         /// <param name="subscriptionArn">The ARN of the subscription to modify.</param>
-        /// <param name="attributeName">A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses: <ul> <li>  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints. </li> <li>  <code>FilterPolicy</code> – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic. </li> <li>  <code>RawMessageDelivery</code> – When set to <code>true</code>, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata. </li> <li>  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable) or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held in the dead-letter queue for further analysis or reprocessing. </li> </ul></param>
+        /// <param name="attributeName">A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that this action uses: <ul> <li>  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints. </li> <li>  <code>FilterPolicy</code> – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic. </li> <li>  <code>RawMessageDelivery</code> – When set to <code>true</code>, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata. </li> <li>  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable) or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held in the dead-letter queue for further analysis or reprocessing. </li> </ul> The following attribute applies only to Amazon Kinesis Data Firehose delivery stream subscriptions: <ul> <li>  <code>SubscriptionRoleArn</code> – The ARN of the IAM role that has the following: <ul> <li> Permission to write to the Kinesis Data Firehose delivery stream </li> <li> Amazon SNS listed as a trusted entity </li> </ul> Specifying a valid ARN for this attribute is required for Kinesis Data Firehose delivery stream subscriptions. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html">Fanout to Kinesis Data Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>. </li> </ul></param>
         /// <param name="attributeValue">The new value for the attribute in JSON format.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -4225,7 +4247,7 @@ namespace Amazon.SimpleNotificationService
         /// Allows a topic owner to set an attribute of the topic to a new value.
         /// </summary>
         /// <param name="topicArn">The ARN of the topic to modify.</param>
-        /// <param name="attributeName">A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses: <ul> <li>  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints. </li> <li>  <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions. </li> <li>  <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic. </li> </ul> The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>: <ul> <li>  <code>KmsMasterKeyId</code> - The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>.  </li> </ul></param>
+        /// <param name="attributeName">A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses: <ul> <li>  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints. </li> <li>  <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions. </li> <li>  <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic. </li> </ul> The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>: <ul> <li>  <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>.  </li> </ul> The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>: <ul> <li>  <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics.  <ul> <li> By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action.  </li> <li> When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action. </li> </ul> </li> </ul></param>
         /// <param name="attributeValue">The new value for the attribute.</param>
         /// 
         /// <returns>The response from the SetTopicAttributes service method, as returned by SimpleNotificationService.</returns>
@@ -4293,7 +4315,7 @@ namespace Amazon.SimpleNotificationService
         /// Allows a topic owner to set an attribute of the topic to a new value.
         /// </summary>
         /// <param name="topicArn">The ARN of the topic to modify.</param>
-        /// <param name="attributeName">A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses: <ul> <li>  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints. </li> <li>  <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions. </li> <li>  <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic. </li> </ul> The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>: <ul> <li>  <code>KmsMasterKeyId</code> - The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>.  </li> </ul></param>
+        /// <param name="attributeName">A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the <code>SetTopicAttributes</code> action uses: <ul> <li>  <code>DeliveryPolicy</code> – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints. </li> <li>  <code>DisplayName</code> – The display name to use for a topic with SMS subscriptions. </li> <li>  <code>Policy</code> – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic. </li> </ul> The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html">server-side-encryption</a>: <ul> <li>  <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms">Key Terms</a>. For more examples, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">KeyId</a> in the <i>AWS Key Management Service API Reference</i>.  </li> </ul> The following attribute applies only to <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html">FIFO topics</a>: <ul> <li>  <code>ContentBasedDeduplication</code> – Enables content-based deduplication for FIFO topics.  <ul> <li> By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>. If you create a FIFO topic and this attribute is <code>false</code>, you must specify a value for the <code>MessageDeduplicationId</code> parameter for the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Publish.html">Publish</a> action.  </li> <li> When you set <code>ContentBasedDeduplication</code> to <code>true</code>, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message). (Optional) To override the generated value, you can specify a value for the the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code> action. </li> </ul> </li> </ul></param>
         /// <param name="attributeValue">The new value for the attribute.</param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
@@ -4370,7 +4392,7 @@ namespace Amazon.SimpleNotificationService
         /// <summary>
         /// Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email,
         /// or if the endpoint and the topic are not in the same AWS account, the endpoint owner
-        /// must the <code>ConfirmSubscription</code> action to confirm the subscription.
+        /// must run the <code>ConfirmSubscription</code> action to confirm the subscription.
         /// 
         ///  
         /// <para>
@@ -4383,8 +4405,8 @@ namespace Amazon.SimpleNotificationService
         /// </para>
         /// </summary>
         /// <param name="topicArn">The ARN of the topic you want to subscribe to.</param>
-        /// <param name="protocol">The protocol you want to use. Supported protocols include: <ul> <li>  <code>http</code> – delivery of JSON-encoded message via HTTP POST </li> <li>  <code>https</code> – delivery of JSON-encoded message via HTTPS POST </li> <li>  <code>email</code> – delivery of message via SMTP </li> <li>  <code>email-json</code> – delivery of JSON-encoded message via SMTP </li> <li>  <code>sms</code> – delivery of message via SMS </li> <li>  <code>sqs</code> – delivery of JSON-encoded message to an Amazon SQS queue </li> <li>  <code>application</code> – delivery of JSON-encoded message to an EndpointArn for a mobile app and device. </li> <li>  <code>lambda</code> – delivery of JSON-encoded message to an Amazon Lambda function. </li> </ul></param>
-        /// <param name="endpoint">The endpoint that you want to receive notifications. Endpoints vary by protocol: <ul> <li> For the <code>http</code> protocol, the (public) endpoint is a URL beginning with <code>http://</code>  </li> <li> For the <code>https</code> protocol, the (public) endpoint is a URL beginning with <code>https://</code>  </li> <li> For the <code>email</code> protocol, the endpoint is an email address </li> <li> For the <code>email-json</code> protocol, the endpoint is an email address </li> <li> For the <code>sms</code> protocol, the endpoint is a phone number of an SMS-enabled device </li> <li> For the <code>sqs</code> protocol, the endpoint is the ARN of an Amazon SQS queue </li> <li> For the <code>application</code> protocol, the endpoint is the EndpointArn of a mobile app and device. </li> <li> For the <code>lambda</code> protocol, the endpoint is the ARN of an Amazon Lambda function. </li> </ul></param>
+        /// <param name="protocol">The protocol that you want to use. Supported protocols include: <ul> <li>  <code>http</code> – delivery of JSON-encoded message via HTTP POST </li> <li>  <code>https</code> – delivery of JSON-encoded message via HTTPS POST </li> <li>  <code>email</code> – delivery of message via SMTP </li> <li>  <code>email-json</code> – delivery of JSON-encoded message via SMTP </li> <li>  <code>sms</code> – delivery of message via SMS </li> <li>  <code>sqs</code> – delivery of JSON-encoded message to an Amazon SQS queue </li> <li>  <code>application</code> – delivery of JSON-encoded message to an EndpointArn for a mobile app and device </li> <li>  <code>lambda</code> – delivery of JSON-encoded message to an AWS Lambda function </li> <li>  <code>firehose</code> – delivery of JSON-encoded message to an Amazon Kinesis Data Firehose delivery stream. </li> </ul></param>
+        /// <param name="endpoint">The endpoint that you want to receive notifications. Endpoints vary by protocol: <ul> <li> For the <code>http</code> protocol, the (public) endpoint is a URL beginning with <code>http://</code>. </li> <li> For the <code>https</code> protocol, the (public) endpoint is a URL beginning with <code>https://</code>. </li> <li> For the <code>email</code> protocol, the endpoint is an email address. </li> <li> For the <code>email-json</code> protocol, the endpoint is an email address. </li> <li> For the <code>sms</code> protocol, the endpoint is a phone number of an SMS-enabled device. </li> <li> For the <code>sqs</code> protocol, the endpoint is the ARN of an Amazon SQS queue. </li> <li> For the <code>application</code> protocol, the endpoint is the EndpointArn of a mobile app and device. </li> <li> For the <code>lambda</code> protocol, the endpoint is the ARN of an AWS Lambda function. </li> <li> For the <code>firehose</code> protocol, the endpoint is the ARN of an Amazon Kinesis Data Firehose delivery stream. </li> </ul></param>
         /// 
         /// <returns>The response from the Subscribe service method, as returned by SimpleNotificationService.</returns>
         /// <exception cref="Amazon.SimpleNotificationService.Model.AuthorizationErrorException">
@@ -4424,7 +4446,7 @@ namespace Amazon.SimpleNotificationService
         /// <summary>
         /// Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email,
         /// or if the endpoint and the topic are not in the same AWS account, the endpoint owner
-        /// must the <code>ConfirmSubscription</code> action to confirm the subscription.
+        /// must run the <code>ConfirmSubscription</code> action to confirm the subscription.
         /// 
         ///  
         /// <para>
@@ -4476,7 +4498,7 @@ namespace Amazon.SimpleNotificationService
         /// <summary>
         /// Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email,
         /// or if the endpoint and the topic are not in the same AWS account, the endpoint owner
-        /// must the <code>ConfirmSubscription</code> action to confirm the subscription.
+        /// must run the <code>ConfirmSubscription</code> action to confirm the subscription.
         /// 
         ///  
         /// <para>
@@ -4489,8 +4511,8 @@ namespace Amazon.SimpleNotificationService
         /// </para>
         /// </summary>
         /// <param name="topicArn">The ARN of the topic you want to subscribe to.</param>
-        /// <param name="protocol">The protocol you want to use. Supported protocols include: <ul> <li>  <code>http</code> – delivery of JSON-encoded message via HTTP POST </li> <li>  <code>https</code> – delivery of JSON-encoded message via HTTPS POST </li> <li>  <code>email</code> – delivery of message via SMTP </li> <li>  <code>email-json</code> – delivery of JSON-encoded message via SMTP </li> <li>  <code>sms</code> – delivery of message via SMS </li> <li>  <code>sqs</code> – delivery of JSON-encoded message to an Amazon SQS queue </li> <li>  <code>application</code> – delivery of JSON-encoded message to an EndpointArn for a mobile app and device. </li> <li>  <code>lambda</code> – delivery of JSON-encoded message to an Amazon Lambda function. </li> </ul></param>
-        /// <param name="endpoint">The endpoint that you want to receive notifications. Endpoints vary by protocol: <ul> <li> For the <code>http</code> protocol, the (public) endpoint is a URL beginning with <code>http://</code>  </li> <li> For the <code>https</code> protocol, the (public) endpoint is a URL beginning with <code>https://</code>  </li> <li> For the <code>email</code> protocol, the endpoint is an email address </li> <li> For the <code>email-json</code> protocol, the endpoint is an email address </li> <li> For the <code>sms</code> protocol, the endpoint is a phone number of an SMS-enabled device </li> <li> For the <code>sqs</code> protocol, the endpoint is the ARN of an Amazon SQS queue </li> <li> For the <code>application</code> protocol, the endpoint is the EndpointArn of a mobile app and device. </li> <li> For the <code>lambda</code> protocol, the endpoint is the ARN of an Amazon Lambda function. </li> </ul></param>
+        /// <param name="protocol">The protocol that you want to use. Supported protocols include: <ul> <li>  <code>http</code> – delivery of JSON-encoded message via HTTP POST </li> <li>  <code>https</code> – delivery of JSON-encoded message via HTTPS POST </li> <li>  <code>email</code> – delivery of message via SMTP </li> <li>  <code>email-json</code> – delivery of JSON-encoded message via SMTP </li> <li>  <code>sms</code> – delivery of message via SMS </li> <li>  <code>sqs</code> – delivery of JSON-encoded message to an Amazon SQS queue </li> <li>  <code>application</code> – delivery of JSON-encoded message to an EndpointArn for a mobile app and device </li> <li>  <code>lambda</code> – delivery of JSON-encoded message to an AWS Lambda function </li> <li>  <code>firehose</code> – delivery of JSON-encoded message to an Amazon Kinesis Data Firehose delivery stream. </li> </ul></param>
+        /// <param name="endpoint">The endpoint that you want to receive notifications. Endpoints vary by protocol: <ul> <li> For the <code>http</code> protocol, the (public) endpoint is a URL beginning with <code>http://</code>. </li> <li> For the <code>https</code> protocol, the (public) endpoint is a URL beginning with <code>https://</code>. </li> <li> For the <code>email</code> protocol, the endpoint is an email address. </li> <li> For the <code>email-json</code> protocol, the endpoint is an email address. </li> <li> For the <code>sms</code> protocol, the endpoint is a phone number of an SMS-enabled device. </li> <li> For the <code>sqs</code> protocol, the endpoint is the ARN of an Amazon SQS queue. </li> <li> For the <code>application</code> protocol, the endpoint is the EndpointArn of a mobile app and device. </li> <li> For the <code>lambda</code> protocol, the endpoint is the ARN of an AWS Lambda function. </li> <li> For the <code>firehose</code> protocol, the endpoint is the ARN of an Amazon Kinesis Data Firehose delivery stream. </li> </ul></param>
         /// <param name="cancellationToken">
         ///     A cancellation token that can be used by other objects or threads to receive notice of cancellation.
         /// </param>
@@ -4533,7 +4555,7 @@ namespace Amazon.SimpleNotificationService
         /// <summary>
         /// Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email,
         /// or if the endpoint and the topic are not in the same AWS account, the endpoint owner
-        /// must the <code>ConfirmSubscription</code> action to confirm the subscription.
+        /// must run the <code>ConfirmSubscription</code> action to confirm the subscription.
         /// 
         ///  
         /// <para>

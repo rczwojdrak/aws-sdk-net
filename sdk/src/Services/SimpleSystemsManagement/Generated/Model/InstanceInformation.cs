@@ -247,7 +247,7 @@ namespace Amazon.SimpleSystemsManagement.Model
         /// <summary>
         /// Gets and sets the property LastPingDateTime. 
         /// <para>
-        /// The date and time when agent last pinged Systems Manager service. 
+        /// The date and time when the agent last pinged the Systems Manager service. 
         /// </para>
         /// </summary>
         public DateTime LastPingDateTime
@@ -313,6 +313,11 @@ namespace Amazon.SimpleSystemsManagement.Model
         /// <para>
         /// Connection status of SSM Agent. 
         /// </para>
+        ///  <note> 
+        /// <para>
+        /// The status <code>Inactive</code> has been deprecated and is no longer in use.
+        /// </para>
+        ///  </note>
         /// </summary>
         public PingStatus PingStatus
         {

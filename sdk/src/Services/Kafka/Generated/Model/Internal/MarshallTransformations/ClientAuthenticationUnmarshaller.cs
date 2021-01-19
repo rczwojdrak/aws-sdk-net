@@ -64,6 +64,12 @@ namespace Amazon.Kafka.Model.Internal.MarshallTransformations
             int targetDepth = context.CurrentDepth;
             while (context.ReadAtDepth(targetDepth))
             {
+                if (context.TestExpression("sasl", targetDepth))
+                {
+                    var unmarshaller = SaslUnmarshaller.Instance;
+                    unmarshalledObject.Sasl = unmarshaller.Unmarshall(context);
+                    continue;
+                }
                 if (context.TestExpression("tls", targetDepth))
                 {
                     var unmarshaller = TlsUnmarshaller.Instance;

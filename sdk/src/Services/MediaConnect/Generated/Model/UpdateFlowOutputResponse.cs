@@ -53,7 +53,7 @@ namespace Amazon.MediaConnect.Model
         }
 
         /// <summary>
-        /// Gets and sets the property Output.
+        /// Gets and sets the property Output. The new settings of the output that you updated.
         /// </summary>
         public Output Output
         {
